@@ -5,16 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#0f172a">
   <meta name="description" content="Workspace Pro - Espace de travail sécurisé">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Workspace Pro</title>
   
-  <!-- PWA -->
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="assets/icon-192.png">
-  
-  <!-- Phosphor Icons -->
-  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/dist/index.umd.js"></script>
+  <!-- PWA Manifest Inline -->
+  <link rel="manifest" href='data:application/manifest+json;base64,eyJuYW1lIjoiV29ya3NwYWNlIFBybyIsInNob3J0X25hbWUiOiJXb3Jrc3BhY2UiLCJzdGFydF91cmwiOiIvIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBmMTcyYSIsInRoZW1lX2NvbG9yIjoiIzBmMTcyYSJ9'>
   
   <style>
     :root {
@@ -31,10 +25,8 @@
       --text-secondary: #94a3b8;
       --border: rgba(148, 163, 184, 0.1);
       --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
       --radius: 16px;
       --radius-sm: 12px;
-      --radius-lg: 24px;
     }
     
     [data-theme="light"] {
@@ -45,46 +37,34 @@
       --text-secondary: #64748b;
       --border: rgba(148, 163, 184, 0.2);
       --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
-    }
-        * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
     }
     
-    html {
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', system-ui, sans-serif; }
     
     body {
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      overflow-x: hidden;
-      transition: background 0.3s ease;
-    }
-    
-    /* ONE UI HEADER */
-    .oneui-header {
+      padding-bottom: 100px;
+      transition: background 0.3s;
+    }    
+    /* HEADER */
+    .header {
       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      padding: 1.5rem 1rem 3rem;
-      border-radius: 0 0 var(--radius-lg) 0;
-      box-shadow: var(--shadow);
+      padding: 1.5rem 1rem 2.5rem;
+      border-radius: 0 0 24px 0;
       position: relative;
       overflow: hidden;
     }
     
-    .oneui-header::before {
+    .header::before {
       content: '';
       position: absolute;
       top: -50%;
-      right: -20%;
-      width: 300px;
-      height: 300px;
-      background: rgba(255, 255, 255, 0.1);
+      right: -10%;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.1);
       border-radius: 50%;
       animation: float 6s ease-in-out infinite;
     }
@@ -96,40 +76,39 @@
     
     .header-content {
       display: flex;
-      justify-content: space-between;      align-items: center;
+      justify-content: space-between;
+      align-items: center;
       position: relative;
       z-index: 1;
     }
     
-    .app-brand {
+    .brand {
       display: flex;
       align-items: center;
       gap: 0.75rem;
     }
     
-    .app-icon {
+    .brand-icon {
       width: 48px;
       height: 48px;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255,255,255,0.2);
       backdrop-filter: blur(10px);
-      border-radius: var(--radius-sm);
+      border-radius: 12px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      justify-content: center;      border: 2px solid rgba(255,255,255,0.3);
     }
     
-    .app-title h1 {
+    .brand h1 {
       font-size: 1.4rem;
       font-weight: 700;
       color: white;
       margin-bottom: 0.2rem;
     }
     
-    .app-title p {
+    .brand p {
       font-size: 0.85rem;
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255,255,255,0.8);
     }
     
     .header-actions {
@@ -140,150 +119,42 @@
     .icon-btn {
       width: 44px;
       height: 44px;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255,255,255,0.15);
       backdrop-filter: blur(10px);
       border: none;
       border-radius: 50%;
       color: white;
-      font-size: 1.3rem;      cursor: pointer;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
+      transition: all 0.3s;
     }
     
-    .icon-btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
+    .icon-btn:active { transform: scale(0.9); }
+    .icon-btn:hover { background: rgba(255,255,255,0.25); }
     
-    .icon-btn:active::before {
-      width: 200px;
-      height: 200px;
-    }
-    
-    .icon-btn:active {
-      transform: scale(0.9);
-    }
-    
-    .icon-btn:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: translateY(-2px);
-    }
-    
-    /* PROFILE CARD */
-    .profile-card {
-      background: var(--surface);
-      margin: -2rem 1rem 1rem;
-      padding: 1.5rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-lg);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      position: relative;
-      z-index: 10;
-      animation: slideUp 0.5s ease;
-    }    
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .profile-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--primary);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    
-    .profile-avatar:hover {
-      transform: scale(1.05);
-    }
-    
-    .profile-info {
-      flex: 1;
-    }
-    
-    .profile-name {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-    
-    .profile-email {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-    
-    .profile-status {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.4rem 0.8rem;
-      background: rgba(16, 185, 129, 0.1);
-      border-radius: 20px;
-      font-size: 0.85rem;      color: var(--success);
-      font-weight: 600;
-    }
-    
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--success);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    
-    /* NETWORK INFO */
-    .network-info {
+    /* NETWORK CARDS */
+    .network-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0.75rem;
-      margin: 0 1rem 1rem;
+      padding: 0 1rem;
+      margin-top: -1.5rem;
+      margin-bottom: 1rem;
     }
     
     .network-card {
-      background: var(--surface);
-      padding: 1rem;
+      background: var(--surface);      padding: 1rem;
       border-radius: var(--radius-sm);
       text-align: center;
       box-shadow: var(--shadow);
-      transition: transform 0.3s;
-    }
-    
-    .network-card:active {
-      transform: scale(0.95);
     }
     
     .network-icon {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      width: 32px;
+      height: 32px;
+      margin: 0 auto 0.5rem;
       color: var(--primary);
     }
     
@@ -292,27 +163,45 @@
       color: var(--text-secondary);
       margin-bottom: 0.25rem;
     }
-        .network-value {
+    
+    .network-value {
       font-size: 0.9rem;
       font-weight: 700;
+    }
+    
+    /* SEARCH */
+    .search-box {
+      padding: 0 1rem 1rem;
+    }
+    
+    .search-input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: var(--surface);
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+    }
+    
+    .search-input-wrapper input {
+      flex: 1;
+      background: none;
+      border: none;
       color: var(--text);
+      font-size: 1rem;
+      outline: none;
     }
     
     /* FILTERS */
-    .filters-container {
+    .filters {      display: flex;
+      gap: 0.5rem;
       padding: 0 1rem 1rem;
       overflow-x: auto;
       scrollbar-width: none;
     }
     
-    .filters-container::-webkit-scrollbar {
-      display: none;
-    }
-    
-    .filters {
-      display: flex;
-      gap: 0.5rem;
-    }
+    .filters::-webkit-scrollbar { display: none; }
     
     .filter-chip {
       padding: 0.7rem 1.2rem;
@@ -324,10 +213,10 @@
       white-space: nowrap;
       cursor: pointer;
       transition: all 0.3s;
+      color: var(--text-secondary);
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      color: var(--text-secondary);
     }
     
     .filter-chip.active {
@@ -335,69 +224,43 @@
       color: white;
       border-color: var(--primary);
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
     }
     
     /* SITES GRID */
     .sites-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));      gap: 1rem;
-      padding: 0 1rem 100px;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 1rem;
+      padding: 0 1rem;
     }
     
     .site-card {
       background: var(--surface);
       border-radius: var(--radius);
       padding: 1.2rem;
-      position: relative;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s;
       box-shadow: var(--shadow);
-      overflow: hidden;
-      animation: fadeIn 0.5s ease;
     }
     
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
+    .site-card:hover {      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
     }
     
-    .site-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    .site-card:hover::before {
-      opacity: 1;
-    }
-    
-    .site-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-    
-    .site-card:active {
-      transform: scale(0.98);
-    }
+    .site-card:active { transform: scale(0.98); }
     
     .site-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;      margin-bottom: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1rem;
     }
     
-    .site-icon-wrapper {
+    .site-icon {
       width: 56px;
       height: 56px;
       background: var(--surface-elevated);
-      border-radius: var(--radius-sm);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -406,7 +269,7 @@
       border: 2px solid var(--border);
     }
     
-    .site-icon-wrapper img {
+    .site-icon img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -428,10 +291,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
       transition: all 0.2s;
-    }
-    
+    }    
     .site-action-btn:hover {
       background: var(--primary);
       color: white;
@@ -439,7 +300,8 @@
     }
     
     .site-action-btn.delete:hover {
-      background: var(--danger);    }
+      background: var(--danger);
+    }
     
     .site-name {
       font-weight: 700;
@@ -475,24 +337,13 @@
       gap: 0.3rem;
     }
     
-    .badge-fav {
-      background: rgba(251, 191, 36, 0.15);
-      color: #fbbf24;
-    }
+    .badge-fav { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+    .badge-secure { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+    .badge-visits { background: var(--surface-elevated); color: var(--text-secondary); }
     
-    .badge-secure {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--success);
-    }
-    
-    .badge-visits {
-      background: var(--surface-elevated);
-      color: var(--text-secondary);
-    }    
-    /* FAB */
-    .fab {
+    /* FAB */    .fab {
       position: fixed;
-      bottom: 24px;
+      bottom: 100px;
       right: 24px;
       width: 64px;
       height: 64px;
@@ -500,77 +351,22 @@
       border: none;
       border-radius: 50%;
       color: white;
-      font-size: 1.8rem;
       cursor: pointer;
       box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s;
       z-index: 100;
     }
     
     .fab:hover {
       transform: scale(1.1) rotate(90deg);
-      box-shadow: 0 12px 32px rgba(59, 130, 246, 0.5);
     }
     
-    .fab:active {
-      transform: scale(0.95);
-    }
+    .fab:active { transform: scale(0.95); }
     
-    /* INSTALL BUTTON */
-    .install-banner {
-      position: fixed;
-      bottom: 100px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: var(--surface);
-      padding: 1rem 1.5rem;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-lg);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      z-index: 99;
-      opacity: 0;
-      transition: all 0.3s;
-    }
-    
-    .install-banner.show {      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-    
-    .install-banner-text {
-      flex: 1;
-    }
-    
-    .install-banner-title {
-      font-weight: 700;
-      margin-bottom: 0.2rem;
-    }
-    
-    .install-banner-desc {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-    }
-    
-    .install-btn {
-      padding: 0.7rem 1.5rem;
-      background: var(--success);
-      color: white;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    
-    .install-btn:active {
-      transform: scale(0.95);
-    }
-    
-    /* MODALS */
+    /* MODAL */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -583,26 +379,21 @@
       display: none;
       align-items: flex-end;
       justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s;
     }
-        .modal-overlay.active {
-      display: flex;
-      opacity: 1;
-    }
+    
+    .modal-overlay.active { display: flex; }
     
     .modal {
       background: var(--surface);
       width: 100%;
       max-height: 85vh;
-      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      border-radius: 24px 24px 0 0;
       overflow: hidden;
-      transform: translateY(100%);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .modal-overlay.active .modal {
-      transform: translateY(0);
+      animation: slideUp 0.3s;
+    }    
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
     }
     
     .modal-header {
@@ -628,14 +419,14 @@
       border: none;
       border-radius: 50%;
       color: var(--text);
-      font-size: 1.2rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.2s;
     }
-        .modal-close:hover {
+    
+    .modal-close:hover {
       background: var(--danger);
       color: white;
       transform: rotate(90deg);
@@ -647,9 +438,8 @@
       max-height: calc(85vh - 80px);
     }
     
-    /* FORM ELEMENTS */
-    .form-group {
-      margin-bottom: 1.2rem;
+    /* FORM */
+    .form-group {      margin-bottom: 1.2rem;
     }
     
     .form-label {
@@ -657,7 +447,6 @@
       font-size: 0.9rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
-      color: var(--text);
     }
     
     .form-input {
@@ -665,7 +454,7 @@
       padding: 1rem;
       background: var(--surface-elevated);
       border: 2px solid var(--border);
-      border-radius: var(--radius-sm);
+      border-radius: 12px;
       color: var(--text);
       font-size: 1rem;
       transition: all 0.3s;
@@ -674,19 +463,6 @@
     .form-input:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-    }
-    
-    .form-input::placeholder {
-      color: var(--text-secondary);
-    }
-    
-    .form-hint {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      margin-top: 0.4rem;      display: flex;
-      align-items: center;
-      gap: 0.3rem;
     }
     
     .checkbox-wrapper {
@@ -695,13 +471,8 @@
       gap: 0.8rem;
       padding: 1rem;
       background: var(--surface-elevated);
-      border-radius: var(--radius-sm);
+      border-radius: 12px;
       cursor: pointer;
-      transition: background 0.2s;
-    }
-    
-    .checkbox-wrapper:hover {
-      background: var(--border);
     }
     
     .checkbox-wrapper input {
@@ -716,157 +487,30 @@
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
       border: none;
-      border-radius: var(--radius-sm);
-      font-size: 1rem;
-      font-weight: 700;
+      border-radius: 12px;
+      font-size: 1rem;      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      transition: all 0.3s;
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-    }
-    
-    .btn-primary:active {
-      transform: scale(0.98);
+      margin-top: 1rem;
     }
     
     .btn-secondary {
-      width: 100%;      padding: 1rem;
+      width: 100%;
+      padding: 1rem;
       background: var(--surface-elevated);
       color: var(--text);
       border: 2px solid var(--border);
-      border-radius: var(--radius-sm);
+      border-radius: 12px;
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
       margin-top: 0.8rem;
-      transition: all 0.2s;
     }
     
-    .btn-secondary:active {
-      background: var(--border);
-    }
-    
-    /* VPN SECTION */
-    .vpn-section {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
-      border: 2px solid var(--success);
-      border-radius: var(--radius);
-      padding: 1.2rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    .vpn-header {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-    }
-    
-    .vpn-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--success);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.5rem;
-    }
-    
-    .vpn-title {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--success);
-    }
-        .vpn-status {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-    }
-    
-    .vpn-toggle {
-      width: 60px;
-      height: 32px;
-      background: var(--surface-elevated);
-      border-radius: 16px;
-      position: relative;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    
-    .vpn-toggle.active {
-      background: var(--success);
-    }
-    
-    .vpn-toggle-slider {
-      position: absolute;
-      top: 4px;
-      left: 4px;
-      width: 24px;
-      height: 24px;
-      background: white;
-      border-radius: 50%;
-      transition: transform 0.3s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-    
-    .vpn-toggle.active .vpn-toggle-slider {
-      transform: translateX(28px);
-    }
-    
-    /* EMPTY STATE */
-    .empty-state {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: var(--text-secondary);
-      grid-column: 1 / -1;
-      animation: fadeIn 0.5s;
-    }
-    
-    .empty-icon {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      opacity: 0.5;
-    }
-        .empty-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: var(--text);
-    }
-    
-    /* SEARCH BAR */
-    .search-container {
-      padding: 0 1rem 1rem;
-    }
-    
-    .search-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      background: var(--surface);
-      padding: 0.8rem 1rem;
-      border-radius: var(--radius-sm);
-      box-shadow: var(--shadow);
-    }
-    
-    .search-bar input {
-      flex: 1;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 1rem;
-      outline: none;
-    }
-    
-    .search-bar input::placeholder {
-      color: var(--text-secondary);
-    }
-    
-    /* BOTTOM NAV (ONE UI Style) */
+    /* BOTTOM NAV */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -880,7 +524,8 @@
       box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
       z-index: 50;
       border-top: 1px solid var(--border);
-    }    
+    }
+    
     .nav-item {
       display: flex;
       flex-direction: column;
@@ -891,82 +536,41 @@
       border: none;
       color: var(--text-secondary);
       cursor: pointer;
-      transition: all 0.2s;
-      border-radius: var(--radius-sm);
-    }
+      border-radius: 12px;
+      transition: all 0.2s;    }
     
     .nav-item.active {
       color: var(--primary);
       background: rgba(59, 130, 246, 0.1);
     }
     
-    .nav-item:active {
-      transform: scale(0.9);
+    .nav-item:active { transform: scale(0.9); }
+    
+    /* EMPTY STATE */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-secondary);
+      grid-column: 1 / -1;
     }
     
-    .nav-icon {
-      font-size: 1.4rem;
+    .empty-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1rem;
+      opacity: 0.5;
     }
     
-    .nav-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    
-    /* SCROLLBAR */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    
-    ::-webkit-scrollbar-track {
-      background: var(--bg);
-    }
-    
-    ::-webkit-scrollbar-thumb {
-      background: var(--surface-elevated);
-      border-radius: 4px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--primary);    }
-    
-    /* RESPONSIVE */
-    @media (max-width: 480px) {
-      .sites-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .network-info {
-        grid-template-columns: 1fr;
-      }
-    }
-    
-    /* LOADING SPINNER */
-    .spinner {
-      width: 24px;
-      height: 24px;
-      border: 3px solid rgba(255,255,255,0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    /* TOAST NOTIFICATION */
+    /* TOAST */
     .toast {
       position: fixed;
       bottom: 100px;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
       background: var(--surface);
-      color: var(--text);
       padding: 1rem 1.5rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-lg);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
       z-index: 300;
       opacity: 0;
       transition: all 0.3s;
@@ -978,262 +582,185 @@
     .toast.show {
       transform: translateX(-50%) translateY(0);
       opacity: 1;
-    }    
-    .toast-icon {
-      font-size: 1.3rem;
     }
     
     .toast.success { border-left: 4px solid var(--success); }
     .toast.error { border-left: 4px solid var(--danger); }
-    .toast.warning { border-left: 4px solid var(--warning); }
-  </style>
-</head>
+  </style></head>
 <body>
 
-  <!-- ONE UI HEADER -->
-  <header class="oneui-header">
+  <!-- HEADER -->
+  <header class="header">
     <div class="header-content">
-      <div class="app-brand">
-        <div class="app-icon">
-          <i class="ph ph-briefcase"></i>
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
         </div>
-        <div class="app-title">
+        <div>
           <h1>Workspace Pro</h1>
-          <p>Espace de travail sécurisé</p>
+          <p>Espace sécurisé</p>
         </div>
       </div>
       <div class="header-actions">
         <button class="icon-btn" onclick="app.openSettings()" title="Paramètres">
-          <i class="ph ph-gear"></i>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
         </button>
         <button class="icon-btn" onclick="app.toggleTheme()" title="Thème">
-          <i class="ph ph-moon" id="themeIcon"></i>
+          <svg id="themeIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- PROFILE CARD -->
-  <div class="profile-card" id="profileCard" style="display: none;">
-    <img src="" alt="Profile" class="profile-avatar" id="profileAvatar" onclick="app.openSettings()">
-    <div class="profile-info">
-      <div class="profile-name" id="profileName">Utilisateur</div>
-      <div class="profile-email" id="profileEmail">user@workspace.pro</div>
-    </div>
-    <div class="profile-status">
-      <span class="status-dot"></span>
-      <span>En ligne</span>
-    </div>
-  </div>
-
   <!-- NETWORK INFO -->
-  <div class="network-info">    <div class="network-card">
-      <div class="network-icon"><i class="ph ph-globe"></i></div>
+  <div class="network-grid">
+    <div class="network-card">
+      <div class="network-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+      </div>
       <div class="network-label">IP Publique</div>
       <div class="network-value" id="publicIp">...</div>
     </div>
     <div class="network-card">
-      <div class="network-icon"><i class="ph ph-shield-check"></i></div>
+      <div class="network-icon">        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
       <div class="network-label">VPN</div>
       <div class="network-value" id="vpnStatus">Inactif</div>
     </div>
     <div class="network-card">
-      <div class="network-icon"><i class="ph ph-database"></i></div>
+      <div class="network-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+      </div>
       <div class="network-label">DNS</div>
-      <div class="network-value" id="dnsStatus">Auto</div>
+      <div class="network-value">Auto</div>
     </div>
   </div>
 
   <!-- SEARCH -->
-  <div class="search-container">
-    <div class="search-bar">
-      <i class="ph ph-magnifying-glass" style="color: var(--text-secondary); font-size: 1.2rem;"></i>
+  <div class="search-box">
+    <div class="search-input-wrapper">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
       <input type="text" placeholder="Rechercher un site..." id="searchInput" oninput="app.searchSites(this.value)">
     </div>
   </div>
 
   <!-- FILTERS -->
-  <div class="filters-container">
-    <div class="filters">
-      <div class="filter-chip active" onclick="app.setFilter('all', this)">
-        <i class="ph ph-squares-four"></i> Tous
-      </div>
-      <div class="filter-chip" onclick="app.setFilter('favorites', this)">
-        <i class="ph ph-star"></i> Favoris
-      </div>
-      <div class="filter-chip" onclick="app.setFilter('visited', this)">
-        <i class="ph ph-trend-up"></i> Top
-      </div>
-      <div class="filter-chip" onclick="app.setFilter('recent', this)">
-        <i class="ph ph-clock-counter-clockwise"></i> Récents
-      </div>
-      <div class="filter-chip" onclick="app.setFilter('secure', this)">
-        <i class="ph ph-lock-key"></i> Sécurisés
-      </div>
+  <div class="filters">
+    <div class="filter-chip active" onclick="app.setFilter('all', this)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+      </svg>
+      Tous
+    </div>
+    <div class="filter-chip" onclick="app.setFilter('favorites', this)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+      </svg>
+      Favoris
+    </div>
+    <div class="filter-chip" onclick="app.setFilter('visited', this)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+        <polyline points="17 6 23 6 23 12"></polyline>
+      </svg>
+      Top
+    </div>
+    <div class="filter-chip" onclick="app.setFilter('recent', this)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+      Récents
+    </div>
+    <div class="filter-chip" onclick="app.setFilter('secure', this)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      Sécurisés
     </div>
   </div>
 
   <!-- SITES GRID -->
   <div class="sites-grid" id="sitesGrid"></div>
 
-  <!-- FAB -->  <button class="fab" onclick="app.openAddModal()">
-    <i class="ph ph-plus"></i>
+  <!-- FAB -->
+  <button class="fab" onclick="app.openAddModal()">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"></line>
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+    </svg>
   </button>
 
-  <!-- INSTALL BANNER -->
-  <div class="install-banner" id="installBanner">
-    <div class="install-banner-text">
-      <div class="install-banner-title">📱 Installer l'application</div>
-      <div class="install-banner-desc">Accès rapide depuis l'écran d'accueil</div>
-    </div>
-    <button class="install-btn" onclick="app.installPWA()">Installer</button>
-  </div>
-
-  <!-- ADD/EDIT MODAL -->
+  <!-- ADD MODAL -->
   <div class="modal-overlay" id="addModal">
     <div class="modal">
       <div class="modal-header">
         <div class="modal-title">
-          <i class="ph ph-plus-circle"></i>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
           <span id="modalTitle">Nouveau Site</span>
         </div>
         <button class="modal-close" onclick="app.closeModal('addModal')">
-          <i class="ph ph-x"></i>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
         </button>
-      </div>
-      <div class="modal-content">
+      </div>      <div class="modal-content">
         <div class="form-group">
           <label class="form-label">URL du site</label>
           <input type="text" class="form-input" id="siteUrl" placeholder="https://example.com">
-          <div class="form-hint">
-            <i class="ph ph-info"></i>
-            L'URL sera automatiquement sécurisée (HTTPS)
-          </div>
         </div>
-        
         <div class="form-group">
           <label class="form-label">Nom</label>
           <input type="text" class="form-input" id="siteName" placeholder="Mon Site">
         </div>
-        
-        <div style="margin: 1.5rem 0;">
-          <div class="form-label" style="margin-bottom: 1rem;">
-            <i class="ph ph-lock-key"></i> Identifiants (chiffrés)
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label">Email / Login</label>
-            <input type="email" class="form-input" id="siteEmail" placeholder="user@example.com">
-          </div>
-                    <div class="form-group">
-            <label class="form-label">Téléphone</label>
-            <input type="tel" class="form-input" id="sitePhone" placeholder="+33 6...">
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label">Mot de passe</label>
-            <input type="password" class="form-input" id="sitePass" placeholder="••••••••">
-          </div>
-        </div>
-        
-        <label class="checkbox-wrapper">
-          <input type="checkbox" id="siteFav">
-          <span><i class="ph ph-star" style="color: #fbbf24;"></i> Ajouter aux favoris</span>
-        </label>
-        
-        <button class="btn-primary" onclick="app.saveSite()" style="margin-top: 1.5rem;">
-          <i class="ph ph-check"></i>
-          Enregistrer
-        </button>
-        <button class="btn-secondary" onclick="app.closeModal('addModal')">
-          Annuler
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- SETTINGS MODAL -->
-  <div class="modal-overlay" id="settingsModal">
-    <div class="modal">
-      <div class="modal-header">
-        <div class="modal-title">
-          <i class="ph ph-gear"></i>
-          Paramètres
-        </div>
-        <button class="modal-close" onclick="app.closeModal('settingsModal')">
-          <i class="ph ph-x"></i>
-        </button>
-      </div>
-      <div class="modal-content">
-        <!-- VPN Section -->
-        <div class="vpn-section">
-          <div class="vpn-header">
-            <div class="vpn-icon">
-              <i class="ph ph-shield-check"></i>
-            </div>
-            <div style="flex: 1;">
-              <div class="vpn-title">VPN / Proxy</div>
-              <div class="vpn-status">Protège toutes vos connexions</div>
-            </div>            <div class="vpn-toggle" id="vpnToggle" onclick="app.toggleVPN()">
-              <div class="vpn-toggle-slider"></div>
-            </div>
-          </div>
-          
-          <div class="form-group" style="margin-bottom: 0;">
-            <input type="text" class="form-input" id="proxyUrl" placeholder="http://proxy.example.com:8080">
-            <div class="form-hint">
-              <i class="ph ph-info"></i>
-              Laissez vide pour utiliser le VPN système
-            </div>
-          </div>
-        </div>
-        
-        <!-- Profile -->
-        <div class="form-group">
-          <label class="form-label">Photo de profil</label>
-          <input type="file" class="form-input" accept="image/*" onchange="app.handleProfileUpload(this)">
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">Nom</label>
-          <input type="text" class="form-input" id="settingName" placeholder="Votre nom">
-        </div>
-        
         <div class="form-group">
           <label class="form-label">Email</label>
-          <input type="email" class="form-input" id="settingEmail" placeholder="vous@email.com">
+          <input type="email" class="form-input" id="siteEmail" placeholder="user@example.com">
         </div>
-        
-        <!-- API Configuration -->
         <div class="form-group">
-          <label class="form-label">API Key (optionnel)</label>
-          <input type="password" class="form-input" id="apiKey" placeholder="sk-...">
-          <div class="form-hint">
-            <i class="ph ph-info"></i>
-            Pour accéder aux APIs externes
-          </div>
+          <label class="form-label">Mot de passe</label>
+          <input type="password" class="form-input" id="sitePass" placeholder="••••••••">
         </div>
-        
-        <!-- Data Management -->
-        <div style="margin-top: 2rem;">
-          <div class="form-label" style="margin-bottom: 1rem;">Données</div>
-          <button class="btn-secondary" onclick="app.exportData()">
-            <i class="ph ph-download-simple"></i>
-            Exporter mes données
-          </button>
-          <button class="btn-secondary" onclick="app.importData()">
-            <i class="ph ph-upload-simple"></i>
-            Importer des données          </button>
-          <button class="btn-secondary" onclick="app.clearAllData()" style="color: var(--danger); border-color: var(--danger);">
-            <i class="ph ph-trash"></i>
-            Tout effacer
-          </button>
-        </div>
-        
-        <button class="btn-primary" onclick="app.saveSettings()" style="margin-top: 1.5rem;">
-          <i class="ph ph-check"></i>
-          Sauvegarder les paramètres
+        <label class="checkbox-wrapper">
+          <input type="checkbox" id="siteFav">
+          <span><svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="2" style="vertical-align: middle; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Favori</span>
+        </label>
+        <button class="btn-primary" onclick="app.saveSite()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Enregistrer
         </button>
+        <button class="btn-secondary" onclick="app.closeModal('addModal')">Annuler</button>
       </div>
     </div>
   </div>
@@ -1241,48 +768,50 @@
   <!-- BOTTOM NAV -->
   <nav class="bottom-nav">
     <button class="nav-item active" onclick="app.setFilter('all')">
-      <i class="ph ph-squares-four nav-icon"></i>
-      <span class="nav-label">Accueil</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+      </svg>
+      <span>Accueil</span>
     </button>
     <button class="nav-item" onclick="app.openAddModal()">
-      <i class="ph ph-plus-circle nav-icon"></i>
-      <span class="nav-label">Ajouter</span>
-    </button>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="16"></line>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
+      <span>Ajouter</span>    </button>
     <button class="nav-item" onclick="app.openSettings()">
-      <i class="ph ph-gear nav-icon"></i>
-      <span class="nav-label">Paramètres</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+      <span>Paramètres</span>
     </button>
   </nav>
 
   <!-- TOAST -->
   <div class="toast" id="toast">
-    <span class="toast-icon"></span>
-    <span class="toast-message"></span>
+    <span id="toastMessage"></span>
   </div>
 
   <script>
-    // Application Class
     class WorkspaceApp {
       constructor() {
         this.sites = JSON.parse(localStorage.getItem('ws_sites')) || [];
-        this.settings = JSON.parse(localStorage.getItem('ws_settings')) || {};
         this.currentFilter = 'all';
         this.editingId = null;
-        this.vpnActive = false;
-        this.deferredPrompt = null;
-        
         this.init();
-      }      
-      init() {
-        this.loadTheme();
-        this.loadProfile();
-        this.detectNetwork();
-        this.render();
-        this.setupPWA();
-        this.startVPNCheck();
       }
       
-      // THEME
+      init() {
+        this.loadTheme();
+        this.detectIP();
+        this.render();
+      }
+      
       loadTheme() {
         const theme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', theme);
@@ -1296,16 +825,17 @@
         html.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
         this.updateThemeIcon(next);
-        this.showToast(`Thème ${next === 'dark' ? 'sombre' : 'clair'} activé`, 'success');
       }
       
       updateThemeIcon(theme) {
         const icon = document.getElementById('themeIcon');
-        icon.className = theme === 'dark' ? 'ph ph-moon' : 'ph ph-sun';
+        if (theme === 'dark') {
+          icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+        } else {          icon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+        }
       }
       
-      // NETWORK DETECTION
-      async detectNetwork() {
+      async detectIP() {
         try {
           const response = await fetch('https://api.ipify.org?format=json');
           const data = await response.json();
@@ -1315,72 +845,13 @@
         }
       }
       
-      startVPNCheck() {
-        setInterval(() => {
-          this.checkVPNStatus();
-        }, 5000);
-      }
-      
-      async checkVPNStatus() {        try {
-          const response = await fetch('https://api.ipify.org?format=json');
-          const data = await response.json();
-          const vpnStatus = document.getElementById('vpnStatus');
-          
-          // Simple heuristic: if IP changed significantly or is from VPN provider
-          if (this.vpnActive) {
-            vpnStatus.textContent = 'Actif';
-            vpnStatus.style.color = 'var(--success)';
-          } else {
-            vpnStatus.textContent = 'Inactif';
-            vpnStatus.style.color = 'var(--text-secondary)';
-          }
-        } catch (e) {
-          console.error('VPN check failed', e);
-        }
-      }
-      
-      // PROFILE
-      loadProfile() {
-        if (this.settings.profilePic || this.settings.name) {
-          document.getElementById('profileCard').style.display = 'flex';
-          if (this.settings.profilePic) {
-            document.getElementById('profileAvatar').src = this.settings.profilePic;
-          }
-          if (this.settings.name) {
-            document.getElementById('profileName').textContent = this.settings.name;
-          }
-          if (this.settings.email) {
-            document.getElementById('profileEmail').textContent = this.settings.email;
-          }
-        }
-      }
-      
-      handleProfileUpload(input) {
-        const file = input.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            this.settings.profilePic = e.target.result;
-            localStorage.setItem('ws_settings', JSON.stringify(this.settings));
-            this.loadProfile();
-            this.showToast('Photo de profil mise à jour', 'success');
-          };
-          reader.readAsDataURL(file);
-        }
-      }
-      
-      // SITES MANAGEMENT
-      render() {        const grid = document.getElementById('sitesGrid');
+      render() {
+        const grid = document.getElementById('sitesGrid');
         let filtered = [...this.sites];
         
-        // Filter
-        if (this.currentFilter === 'favorites') {
-          filtered = filtered.filter(s => s.fav);
-        } else if (this.currentFilter === 'secure') {
-          filtered = filtered.filter(s => s.email || s.pass);
-        }
+        if (this.currentFilter === 'favorites') filtered = filtered.filter(s => s.fav);
+        if (this.currentFilter === 'secure') filtered = filtered.filter(s => s.email || s.pass);
         
-        // Sort
         if (this.currentFilter === 'visited') {
           filtered.sort((a, b) => (b.visits || 0) - (a.visits || 0));
         } else if (this.currentFilter === 'recent') {
@@ -1392,9 +863,10 @@
         if (filtered.length === 0) {
           grid.innerHTML = `
             <div class="empty-state">
-              <div class="empty-icon"><i class="ph ph-bookmarks"></i></div>
-              <div class="empty-title">Aucun site</div>
-              <p>Cliquez sur + pour ajouter votre premier site</p>
+              <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <p>Aucun site enregistré</p>
             </div>
           `;
           return;
@@ -1407,29 +879,38 @@
           return `
             <div class="site-card" onclick="app.launchSite(${site.id})">
               <div class="site-header">
-                <div class="site-icon-wrapper">
-                  ${site.icon 
-                    ? `<img src="${site.icon}" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'ph ph-globe\\' style=\\'font-size: 2rem; color: var(--text-secondary)\\'></i>'">`
-                    : `<i class="ph ph-globe" style="font-size: 2rem; color: var(--text-secondary)"></i>`
+                <div class="site-icon">
+                  ${site.icon                     ? `<img src="${site.icon}" onerror="this.style.display='none';this.parentElement.innerHTML='<svg width=\\'32\\' height=\\'32\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'var(--text-secondary)\\' stroke-width=\\'2\\'><circle cx=\\'12\\' cy=\\'12\\' r=\\'10\\'></circle><line x1=\\'2\\' y1=\\'12\\' x2=\\'22\\' y2=\\'12\\'></line><path d=\\'M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z\\'></path></svg>'">`
+                    : `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`
                   }
                 </div>
                 <div class="site-actions">
-                  <button class="site-action-btn" onclick="event.stopPropagation(); app.copyCredentials(${site.id})" title="Copier identifiants">
-                    <i class="ph ph-copy"></i>
+                  <button class="site-action-btn" onclick="event.stopPropagation(); app.copyCredentials(${site.id})">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                    </svg>
                   </button>
-                  <button class="site-action-btn" onclick="event.stopPropagation(); app.editSite(${site.id})" title="Modifier">
-                    <i class="ph ph-pencil-simple"></i>
-                  </button>                  <button class="site-action-btn delete" onclick="event.stopPropagation(); app.deleteSite(${site.id})" title="Supprimer">
-                    <i class="ph ph-trash"></i>
+                  <button class="site-action-btn" onclick="event.stopPropagation(); app.editSite(${site.id})">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                  </button>
+                  <button class="site-action-btn delete" onclick="event.stopPropagation(); app.deleteSite(${site.id})">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
                   </button>
                 </div>
               </div>
               <div class="site-name">${this.escapeHtml(site.name)}</div>
               <div class="site-url">${domain}</div>
               <div class="site-badges">
-                ${site.fav ? '<span class="badge badge-fav"><i class="ph-fill ph-star"></i></span>' : ''}
-                ${hasCreds ? '<span class="badge badge-secure"><i class="ph-fill ph-lock-key"></i></span>' : ''}
-                <span class="badge badge-visits"><i class="ph ph-eye"></i> ${site.visits || 0}</span>
+                ${site.fav ? '<span class="badge badge-fav"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>' : ''}
+                ${hasCreds ? '<span class="badge badge-secure"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span>' : ''}
+                <span class="badge badge-visits"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> ${site.visits || 0}</span>
               </div>
             </div>
           `;
@@ -1448,8 +929,7 @@
         let finalUrl = url;
         if (!url.startsWith('http://') && !url.startsWith('https://')) {
           finalUrl = 'https://' + url;
-        }
-        
+        }        
         const pass = document.getElementById('sitePass').value;
         
         const siteData = {
@@ -1457,7 +937,6 @@
           name: name || this.getDomain(finalUrl),
           icon: `https://www.google.com/s2/favicons?domain=${this.getDomain(finalUrl)}&sz=128`,
           email: document.getElementById('siteEmail').value,
-          phone: document.getElementById('sitePhone').value,
           pass: pass ? btoa(pass) : '',
           fav: document.getElementById('siteFav').checked,
           visits: this.editingId ? (this.sites.find(s => s.id === this.editingId)?.visits || 0) : 0,
@@ -1468,7 +947,8 @@
           const idx = this.sites.findIndex(s => s.id === this.editingId);
           if (idx !== -1) {
             siteData.id = this.editingId;
-            this.sites[idx] = siteData;          }
+            this.sites[idx] = siteData;
+          }
         } else {
           siteData.id = Date.now();
           this.sites.unshift(siteData);
@@ -1477,15 +957,13 @@
         localStorage.setItem('ws_sites', JSON.stringify(this.sites));
         this.closeModal('addModal');
         this.render();
-        this.showToast('Site enregistré avec succès', 'success');
+        this.showToast('Site enregistré', 'success');
         
-        // Clear form
-        ['siteUrl', 'siteName', 'siteEmail', 'sitePhone', 'sitePass'].forEach(id => {
+        ['siteUrl', 'siteName', 'siteEmail', 'sitePass'].forEach(id => {
           document.getElementById(id).value = '';
         });
         document.getElementById('siteFav').checked = false;
         this.editingId = null;
-        document.getElementById('modalTitle').textContent = 'Nouveau Site';
       }
       
       editSite(id) {
@@ -1497,15 +975,13 @@
         document.getElementById('siteUrl').value = site.url;
         document.getElementById('siteName').value = site.name;
         document.getElementById('siteEmail').value = site.email || '';
-        document.getElementById('sitePhone').value = site.phone || '';
         document.getElementById('sitePass').value = site.pass ? atob(site.pass) : '';
         document.getElementById('siteFav').checked = site.fav;
         
-        this.openModal('addModal');
-      }
+        document.getElementById('addModal').classList.add('active');      }
       
       deleteSite(id) {
-        if (confirm('Supprimer définitivement ce site ?')) {
+        if (confirm('Supprimer ce site ?')) {
           this.sites = this.sites.filter(s => s.id !== id);
           localStorage.setItem('ws_sites', JSON.stringify(this.sites));
           this.render();
@@ -1517,18 +993,11 @@
         const site = this.sites.find(s => s.id === id);
         if (!site) return;
         
-        // Update stats        site.visits = (site.visits || 0) + 1;
+        site.visits = (site.visits || 0) + 1;
         site.lastVisit = Date.now();
         localStorage.setItem('ws_sites', JSON.stringify(this.sites));
         
-        // Open with VPN/proxy if active
-        if (this.vpnActive && this.settings.proxyUrl) {
-          // Note: Actual proxy routing requires backend
-          window.open(site.url, '_blank');
-        } else {
-          window.open(site.url, '_blank');
-        }
-        
+        window.open(site.url, '_blank');
         this.render();
       }
       
@@ -1536,42 +1005,29 @@
         const site = this.sites.find(s => s.id === id);
         if (!site) return;
         
-        let text = `🔐 ${site.name}\n🔗 ${site.url}\n`;
-        if (site.email) text += `📧 ${site.email}\n`;
-        if (site.phone) text += `📱 ${site.phone}\n`;
-        if (site.pass) text += `🔑 ${atob(site.pass)}`;
+        let text = `${site.name}\n${site.url}\n`;
+        if (site.email) text += `Email: ${site.email}\n`;
+        if (site.pass) text += `MDP: ${atob(site.pass)}`;
         
         navigator.clipboard.writeText(text).then(() => {
           this.showToast('Identifiants copiés', 'success');
         });
       }
       
-      // FILTERS
       setFilter(filter, element) {
         this.currentFilter = filter;
         
-        // Update UI
-        document.querySelectorAll('.filter-chip').forEach(chip => {
-          chip.classList.remove('active');
-        });
-        if (element) {
-          element.classList.add('active');
-        }
-        
-        // Update bottom nav
-        document.querySelectorAll('.nav-item').forEach((item, index) => {
-          item.classList.remove('active');
-          if (filter === 'all' && index === 0) item.classList.add('active');
-        });
+        document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
+        if (element) element.classList.add('active');
         
         this.render();
       }
-            searchSites(query) {
+      
+      searchSites(query) {
         if (!query) {
           this.render();
           return;
-        }
-        
+        }        
         const filtered = this.sites.filter(s => 
           s.name.toLowerCase().includes(query.toLowerCase()) ||
           s.url.toLowerCase().includes(query.toLowerCase())
@@ -1579,163 +1035,32 @@
         
         const grid = document.getElementById('sitesGrid');
         if (filtered.length === 0) {
-          grid.innerHTML = `
-            <div class="empty-state">
-              <div class="empty-icon"><i class="ph ph-magnifying-glass"></i></div>
-              <div class="empty-title">Aucun résultat</div>
-            </div>
-          `;
+          grid.innerHTML = '<div class="empty-state"><p>Aucun résultat</p></div>';
         } else {
-          // Reuse render logic with filtered data
           this.sites = filtered;
           this.render();
-          // Restore original sites
           this.sites = JSON.parse(localStorage.getItem('ws_sites'));
         }
       }
       
-      // MODALS
       openAddModal() {
         this.editingId = null;
         document.getElementById('modalTitle').textContent = 'Nouveau Site';
-        ['siteUrl', 'siteName', 'siteEmail', 'sitePhone', 'sitePass'].forEach(id => {
+        ['siteUrl', 'siteName', 'siteEmail', 'sitePass'].forEach(id => {
           document.getElementById(id).value = '';
         });
         document.getElementById('siteFav').checked = false;
-        this.openModal('addModal');
+        document.getElementById('addModal').classList.add('active');
       }
       
       openSettings() {
-        document.getElementById('settingName').value = this.settings.name || '';
-        document.getElementById('settingEmail').value = this.settings.email || '';
-        document.getElementById('apiKey').value = this.settings.apiKey || '';
-        document.getElementById('proxyUrl').value = this.settings.proxyUrl || '';
-        this.openModal('settingsModal');
+        this.showToast('Paramètres - Fonctionnalité à venir', 'success');
       }
       
-      openModal(id) {
-        document.getElementById(id).classList.add('active');
-      }      
       closeModal(id) {
         document.getElementById(id).classList.remove('active');
       }
       
-      // VPN
-      toggleVPN() {
-        this.vpnActive = !this.vpnActive;
-        const toggle = document.getElementById('vpnToggle');
-        if (this.vpnActive) {
-          toggle.classList.add('active');
-          this.showToast('VPN activé', 'success');
-        } else {
-          toggle.classList.remove('active');
-          this.showToast('VPN désactivé', 'warning');
-        }
-      }
-      
-      // SETTINGS
-      saveSettings() {
-        this.settings.name = document.getElementById('settingName').value;
-        this.settings.email = document.getElementById('settingEmail').value;
-        this.settings.apiKey = document.getElementById('apiKey').value;
-        this.settings.proxyUrl = document.getElementById('proxyUrl').value;
-        
-        localStorage.setItem('ws_settings', JSON.stringify(this.settings));
-        this.loadProfile();
-        this.closeModal('settingsModal');
-        this.showToast('Paramètres sauvegardés', 'success');
-      }
-      
-      // DATA MANAGEMENT
-      exportData() {
-        const data = {
-          sites: this.sites,
-          settings: this.settings,
-          exportDate: new Date().toISOString(),
-          version: '2.0'
-        };
-        
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `workspace-backup-${Date.now()}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-        
-        this.showToast('Données exportées', 'success');
-      }      
-      importData() {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = '.json';
-        input.onchange = (e) => {
-          const file = e.target.files[0];
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            try {
-              const data = JSON.parse(event.target.result);
-              if (data.sites) {
-                this.sites = data.sites;
-                localStorage.setItem('ws_sites', JSON.stringify(this.sites));
-              }
-              if (data.settings) {
-                this.settings = data.settings;
-                localStorage.setItem('ws_settings', JSON.stringify(this.settings));
-                this.loadProfile();
-              }
-              this.render();
-              this.showToast('Données importées avec succès', 'success');
-            } catch (err) {
-              this.showToast('Erreur lors de l\'import', 'error');
-            }
-          };
-          reader.readAsText(file);
-        };
-        input.click();
-      }
-      
-      clearAllData() {
-        if (confirm('⚠️ ATTENTION: Toutes les données seront supprimées définitivement. Continuer ?')) {
-          localStorage.removeItem('ws_sites');
-          localStorage.removeItem('ws_settings');
-          this.sites = [];
-          this.settings = {};
-          this.render();
-          this.loadProfile();
-          this.showToast('Toutes les données ont été effacées', 'warning');
-        }
-      }
-      
-      // PWA
-      setupPWA() {
-        window.addEventListener('beforeinstallprompt', (e) => {
-          e.preventDefault();
-          this.deferredPrompt = e;
-          setTimeout(() => {
-            document.getElementById('installBanner').classList.add('show');          }, 2000);
-        });
-        
-        window.addEventListener('appinstalled', () => {
-          document.getElementById('installBanner').classList.remove('show');
-          this.deferredPrompt = null;
-        });
-      }
-      
-      installPWA() {
-        if (!this.deferredPrompt) return;
-        
-        this.deferredPrompt.prompt();
-        this.deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            this.showToast('Application installée !', 'success');
-          }
-          this.deferredPrompt = null;
-          document.getElementById('installBanner').classList.remove('show');
-        });
-      }
-      
-      // UTILS
       getDomain(url) {
         try {
           return new URL(url).hostname.replace('www.', '');
@@ -1751,27 +1076,26 @@
       }
       
       showToast(message, type = 'success') {
-        const toast = document.getElementById('toast');
-        toast.className = `toast ${type}`;
-        
-        const icons = {
-          success: '✓',
-          error: '✕',
-          warning: '⚠'
-        };
-        
-        toast.querySelector('.toast-icon').textContent = icons[type];
-        toast.querySelector('.toast-message').textContent = message;
-                toast.classList.add('show');
-        
-        setTimeout(() => {
-          toast.classList.remove('show');
-        }, 3000);
+        const toast = document.getElementById('toast');        toast.className = `toast ${type}`;
+        document.getElementById('toastMessage').textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
       }
     }
     
-    // Initialize App
     const app = new WorkspaceApp();
+    
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      const swCode = `
+        self.addEventListener('install', e => self.skipWaiting());
+        self.addEventListener('activate', e => e.waitUntil(clients.claim()));
+        self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response('Offline'))));
+      `;
+      const blob = new Blob([swCode], {type: 'application/javascript'});
+      const swUrl = URL.createObjectURL(blob);
+      navigator.serviceWorker.register(swUrl);
+    }
   </script>
 </body>
 </html>
