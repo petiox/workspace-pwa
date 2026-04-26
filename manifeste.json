@@ -1,0 +1,48 @@
+{
+  "name": "Workspace Pro - Espace Sécurisé",
+  "short_name": "Workspace",
+  "description": "Votre espace de travail professionnel avec VPN et gestion sécurisée",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "categories": ["productivity", "business", "utilities"],
+  "icons": [
+    {
+      "src": "https://i.ibb.co/4RSj5MKR/Screenshot-20260424-065250-Whats-App-Business.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://i.ibb.co/4RSj5MKR/Screenshot-20260424-065250-Whats-App-Business.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ajouter un site",
+      "short_name": "Ajouter",
+      "description": "Ajouter rapidement un nouveau site",
+      "url": "/index.html?action=add",
+      "icons": [
+        {
+          "src": "https://i.ibb.co/4RSj5MKR/Screenshot-20260424-065250-Whats-App-Business.jpg",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://i.ibb.co/4RSj5MKR/Screenshot-20260424-065250-Whats-App-Business.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "platform": "wide"
+    }
+  ],
+  "prefer_related_applications": false
+}
