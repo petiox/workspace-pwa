@@ -8,7 +8,6 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Workspace Pro">
   <title>Workspace Pro</title>
-
   <link rel="apple-touch-icon" href="https://i.ibb.co/4RSj5MKR/Screenshot-20260424-065250-Whats-App-Business.jpg">
   <link rel="manifest" id="manifestLink">
 
@@ -35,7 +34,6 @@
       --border: rgba(148, 163, 184, 0.25);
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -50,7 +48,6 @@
       -webkit-tap-highlight-color: transparent;
       transition: background 0.3s, color 0.3s;
     }
-
     .icon-sprite {
       display: none;
     }
@@ -82,7 +79,6 @@
       height: 32px;
     }
 
-    /* Header */
     .header {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       padding: 24px 16px 20px;
@@ -156,7 +152,6 @@
       background: rgba(255, 255, 255, 0.3);
     }
 
-    /* Network */
     .network-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -189,7 +184,6 @@
       font-weight: 700;
     }
 
-    /* Storage */
     .storage-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -237,7 +231,6 @@
       transition: width 0.3s;
     }
 
-    /* Search */
     .search-box {
       padding: 0 16px 12px;
     }
@@ -266,7 +259,6 @@
       color: var(--text-muted);
     }
 
-    /* Filters */
     .filters {
       display: flex;
       gap: 8px;
@@ -296,7 +288,6 @@
       border-color: var(--primary);
     }
 
-    /* Sites Grid */
     .sites-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -420,7 +411,6 @@
       color: var(--text);
     }
 
-    /* FAB */
     .fab {
       position: fixed;
       bottom: 90px;
@@ -440,7 +430,6 @@
       justify-content: center;
     }
 
-    /* Bottom Nav */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -482,7 +471,6 @@
       font-weight: 600;
     }
 
-    /* Modal */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -543,7 +531,6 @@
       max-height: calc(85vh - 70px);
     }
 
-    /* Settings */
     .settings-panel {
       position: fixed;
       top: 0;
@@ -588,7 +575,6 @@
       color: var(--primary);
     }
 
-    /* Browser */
     .browser-panel {
       position: fixed;
       top: 0;
@@ -663,7 +649,77 @@
       box-shadow: var(--shadow);
     }
 
-    /* Toast */
+    .master-password-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .master-password-box {
+      background: var(--surface);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+    }
+    .master-password-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 16px 0;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .view-source-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 350;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .view-source-modal.active {
+      display: flex;
+    }
+    .view-source-content {
+      background: var(--surface);
+      width: 90%;
+      max-width: 800px;
+      max-height: 80vh;
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .view-source-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .view-source-body {
+      padding: 16px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: var(--text);
+      background: var(--bg);
+      flex: 1;
+    }
+
     .toast {
       position: fixed;
       bottom: 100px;
@@ -740,8 +796,6 @@
   </style>
 </head>
 <body>
-
-  <!-- Icônes SVG -->
   <svg class="icon-sprite">
     <symbol id="icon-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
     <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
@@ -766,211 +820,187 @@
     <symbol id="icon-arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
     <symbol id="icon-refresh" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></symbol>
     <symbol id="icon-external" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol>
-    <symbol id="icon-folder-open" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="icon-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
   </svg>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="header-content">
-      <div class="brand">
-        <div class="brand-icon">
-          <svg class="icon icon-lg"><use href="#icon-monitor"/></svg>
+  <div class="master-password-overlay" id="masterPasswordOverlay">
+    <div class="master-password-box">
+      <svg class="icon icon-xl" style="color:var(--primary);margin-bottom:12px;"><use href="#icon-lock"/></svg>
+      <h2 style="margin-bottom:8px;">Workspace Pro</h2>
+      <p style="color:var(--text-muted);margin-bottom:16px;">Mot de passe maître requis</p>
+      <input type="password" id="masterPasswordInput" placeholder="Entrez le mot de passe" onkeydown="if(event.key==='Enter')window.unlockApp()">
+      <button class="btn-primary" onclick="window.unlockApp()">Déverrouiller</button>
+      <p id="mpError" style="color:var(--danger);margin-top:8px;display:none;">Mot de passe incorrect</p>
+      <p style="font-size:0.8rem;color:var(--text-muted);margin-top:12px;">Première utilisation ? Définissez votre mot de passe.</p>
+    </div>
+  </div>
+
+  <div id="appContainer" style="display:none;">
+    <header class="header">
+      <div class="header-content">
+        <div class="brand">
+          <div class="brand-icon"><svg class="icon icon-lg"><use href="#icon-monitor"/></svg></div>
+          <div class="brand-text"><h1>Workspace Pro</h1><p>Espace sécurisé</p></div>
         </div>
-        <div class="brand-text">
-          <h1>Workspace Pro</h1>
-          <p>Espace sécurisé</p>
+        <div class="header-actions">
+          <button class="icon-btn" onclick="window.app.openSettingsPanel()"><svg class="icon icon-md"><use href="#icon-settings"/></svg></button>
+          <button class="icon-btn" onclick="window.app.toggleTheme()"><svg class="icon icon-md" id="themeIcon"><use href="#icon-moon"/></svg></button>
         </div>
       </div>
-      <div class="header-actions">
-        <button class="icon-btn" onclick="app.openSettingsPanel()">
-          <svg class="icon icon-md"><use href="#icon-settings"/></svg>
-        </button>
-        <button class="icon-btn" onclick="app.toggleTheme()">
-          <svg class="icon icon-md" id="themeIcon"><use href="#icon-moon"/></svg>
-        </button>
+    </header>
+
+    <div class="network-grid">
+      <div class="network-card">
+        <svg class="icon icon-lg"><use href="#icon-globe"/></svg>
+        <div class="network-label">IP Publique</div>
+        <div class="network-value" id="publicIp">...</div>
+      </div>
+      <div class="network-card">
+        <svg class="icon icon-lg"><use href="#icon-shield"/></svg>
+        <div class="network-label">Proxy</div>
+        <div class="network-value" id="proxyStatus">Non configuré</div>
+      </div>
+      <div class="network-card">
+        <svg class="icon icon-lg"><use href="#icon-database"/></svg>
+        <div class="network-label">DNS</div>
+        <div class="network-value" id="dnsStatus">Cloudflare</div>
       </div>
     </div>
-  </header>
 
-  <!-- Network -->
-  <div class="network-grid">
-    <div class="network-card">
-      <svg class="icon icon-lg"><use href="#icon-globe"/></svg>
-      <div class="network-label">IP Publique</div>
-      <div class="network-value" id="publicIp">...</div>
-    </div>
-    <div class="network-card">
-      <svg class="icon icon-lg"><use href="#icon-shield"/></svg>
-      <div class="network-label">VPN</div>
-      <div class="network-value" id="vpnStatus">Inactif</div>
-    </div>
-    <div class="network-card">
-      <svg class="icon icon-lg"><use href="#icon-database"/></svg>
-      <div class="network-label">DNS</div>
-      <div class="network-value">Auto</div>
-    </div>
-  </div>
-
-  <!-- Storage -->
-  <div class="storage-grid">
-    <div class="storage-card">
-      <div class="storage-header">
-        <svg class="icon icon-md"><use href="#icon-pie-chart"/></svg>
-        <span class="storage-title">Données utilisées</span>
+    <div class="storage-grid">
+      <div class="storage-card">
+        <div class="storage-header">
+          <svg class="icon icon-md"><use href="#icon-pie-chart"/></svg>
+          <span class="storage-title">Données utilisées</span>
+        </div>
+        <div class="storage-value" id="dataUsage">0 KB</div>
+        <div class="storage-bar"><div class="storage-progress" id="dataBar" style="width:0%"></div></div>
       </div>
-      <div class="storage-value" id="dataUsage">0 KB</div>
-      <div class="storage-bar"><div class="storage-progress" id="dataBar" style="width: 0%"></div></div>
-    </div>
-    <div class="storage-card">
-      <div class="storage-header">
-        <svg class="icon icon-md"><use href="#icon-folder"/></svg>
-        <span class="storage-title">Stockage local</span>
+      <div class="storage-card">
+        <div class="storage-header">
+          <svg class="icon icon-md"><use href="#icon-folder"/></svg>
+          <span class="storage-title">Stockage local</span>
+        </div>
+        <div class="storage-value" id="storageUsage">0 KB</div>
+        <div class="storage-bar"><div class="storage-progress" id="storageBar" style="width:0%"></div></div>
       </div>
-      <div class="storage-value" id="storageUsage">0 KB</div>
-      <div class="storage-bar"><div class="storage-progress" id="storageBar" style="width: 0%"></div></div>
     </div>
-  </div>
 
-  <!-- Search -->
-  <div class="search-box">
-    <div class="search-input">
-      <svg class="icon icon-md"><use href="#icon-search"/></svg>
-      <input type="text" placeholder="Rechercher un site..." id="searchInput" oninput="app.searchSites(this.value)">
+    <div class="search-box">
+      <div class="search-input">
+        <svg class="icon icon-md"><use href="#icon-search"/></svg>
+        <input type="text" placeholder="Rechercher un site..." id="searchInput" oninput="window.app.searchSites(this.value)">
+      </div>
     </div>
-  </div>
 
-  <!-- Filters -->
-  <div class="filters">
-    <div class="chip active" onclick="app.setFilter('all', this)">Tous</div>
-    <div class="chip" onclick="app.setFilter('favorites', this)">Favoris</div>
-    <div class="chip" onclick="app.setFilter('visited', this)">Top</div>
-    <div class="chip" onclick="app.setFilter('recent', this)">Récents</div>
-  </div>
+    <div class="filters">
+      <div class="chip active" onclick="window.app.setFilter('all', this)">Tous</div>
+      <div class="chip" onclick="window.app.setFilter('favorites', this)">Favoris</div>
+      <div class="chip" onclick="window.app.setFilter('visited', this)">Top</div>
+      <div class="chip" onclick="window.app.setFilter('recent', this)">Récents</div>
+    </div>
 
-  <!-- Sites Grid -->
-  <div class="sites-grid" id="sitesGrid"></div>
+    <div class="sites-grid" id="sitesGrid"></div>
 
-  <!-- FAB -->
-  <button class="fab" onclick="app.openAddModal()">
-    <svg class="icon icon-xl"><use href="#icon-plus"/></svg>
-  </button>
-
-  <!-- Bottom Nav -->
-  <nav class="bottom-nav">
-    <button class="nav-item active" onclick="app.setFilter('all', this)">
-      <svg class="icon"><use href="#icon-grid"/></svg>
-      <span class="nav-label">Accueil</span>
+    <button class="fab" onclick="window.app.openAddModal()">
+      <svg class="icon icon-xl"><use href="#icon-plus"/></svg>
     </button>
-    <button class="nav-item" onclick="app.openAddModal()">
-      <svg class="icon"><use href="#icon-plus"/></svg>
-      <span class="nav-label">Ajouter</span>
-    </button>
-    <button class="nav-item" onclick="app.openSettingsPanel()">
-      <svg class="icon"><use href="#icon-settings"/></svg>
-      <span class="nav-label">Paramètres</span>
-    </button>
-  </nav>
 
-  <!-- Modal Ajout -->
-  <div class="modal-overlay" id="addModal">
-    <div class="modal">
-      <div class="modal-header">
-        <div class="modal-title">Nouveau Site</div>
-        <button class="modal-close" onclick="app.closeModal('addModal')">
-          <svg class="icon icon-md"><use href="#icon-x"/></svg>
-        </button>
-      </div>
-      <div class="modal-content">
-        <div class="form-group">
-          <label class="form-label">URL</label>
-          <input type="text" class="form-input" id="siteUrl" placeholder="https://example.com">
+    <nav class="bottom-nav">
+      <button class="nav-item active" onclick="window.app.setFilter('all', this)"><svg class="icon"><use href="#icon-grid"/></svg><span class="nav-label">Accueil</span></button>
+      <button class="nav-item" onclick="window.app.openAddModal()"><svg class="icon"><use href="#icon-plus"/></svg><span class="nav-label">Ajouter</span></button>
+      <button class="nav-item" onclick="window.app.openSettingsPanel()"><svg class="icon"><use href="#icon-settings"/></svg><span class="nav-label">Paramètres</span></button>
+    </nav>
+
+    <div class="modal-overlay" id="addModal">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title">Nouveau Site</div>
+          <button class="modal-close" onclick="window.app.closeModal('addModal')"><svg class="icon icon-md"><use href="#icon-x"/></svg></button>
         </div>
-        <div class="form-group">
-          <label class="form-label">Nom</label>
-          <input type="text" class="form-input" id="siteName" placeholder="Mon Site">
+        <div class="modal-content">
+          <div class="form-group"><label class="form-label">URL</label><input type="text" class="form-input" id="siteUrl" placeholder="https://example.com"></div>
+          <div class="form-group"><label class="form-label">Nom</label><input type="text" class="form-input" id="siteName" placeholder="Mon Site"></div>
+          <div class="form-group"><label class="form-label">Email / Login</label><input type="email" class="form-input" id="siteEmail"></div>
+          <div class="form-group"><label class="form-label">Mot de passe</label><input type="password" class="form-input" id="sitePass"></div>
+          <button class="btn-primary" onclick="window.app.saveSite()">Enregistrer</button>
+          <button class="btn-secondary" onclick="window.app.closeModal('addModal')">Annuler</button>
         </div>
-        <div class="form-group">
-          <label class="form-label">Email / Login</label>
-          <input type="email" class="form-input" id="siteEmail">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Mot de passe</label>
-          <input type="password" class="form-input" id="sitePass">
-        </div>
-        <button class="btn-primary" onclick="app.saveSite()">Enregistrer</button>
-        <button class="btn-secondary" onclick="app.closeModal('addModal')">Annuler</button>
       </div>
     </div>
+
+    <div class="settings-panel" id="settingsPanel">
+      <div class="settings-header">
+        <button class="icon-btn" style="background:var(--bg);color:var(--text)" onclick="window.app.closeSettingsPanel()"><svg class="icon icon-md"><use href="#icon-chevron-left"/></svg></button>
+        <span style="font-weight:700;font-size:1.2rem;">Paramètres</span>
+      </div>
+      <div class="settings-content">
+        <div class="setting-item" onclick="window.app.toggleTheme()">
+          <svg class="icon icon-md"><use href="#icon-moon"/></svg><span>Changer le thème</span>
+        </div>
+        <div class="setting-item" id="dnsSetting">
+          <svg class="icon icon-md"><use href="#icon-globe"/></svg>
+          <span style="flex:1;">DNS over HTTPS</span>
+          <input type="text" id="dohInput" value="https://cloudflare-dns.com/dns-query" style="width:200px;padding:4px;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text);" onclick="event.stopPropagation()" onchange="window.app.updateDoh(this.value)">
+        </div>
+        <div class="setting-item" id="proxySetting">
+          <svg class="icon icon-md"><use href="#icon-shield"/></svg>
+          <span style="flex:1;">Proxy URL</span>
+          <input type="text" id="proxyInput" placeholder="https://myproxy.com" style="width:200px;padding:4px;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text);" onclick="event.stopPropagation()" onchange="window.app.updateProxy(this.value)">
+        </div>
+        <div class="setting-item" onclick="window.app.clearWorkspaceFolder()">
+          <svg class="icon icon-md"><use href="#icon-folder-minus"/></svg><span>Vider le dossier</span>
+        </div>
+        <div class="setting-item" onclick="window.app.exportData()">
+          <svg class="icon icon-md"><use href="#icon-download"/></svg><span>Exporter les données</span>
+        </div>
+        <div class="setting-item" onclick="window.app.clearAllData()" style="color:var(--danger)">
+          <svg class="icon icon-md" style="color:var(--danger)"><use href="#icon-trash"/></svg><span style="color:var(--danger)">Tout effacer</span>
+        </div>
+        <div class="setting-item" onclick="window.app.lockApp()">
+          <svg class="icon icon-md"><use href="#icon-lock"/></svg><span>Verrouiller l'application</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="browser-panel" id="browserPanel">
+      <div class="browser-toolbar">
+        <button class="browser-btn" onclick="window.browser.goBack()" title="Retour"><svg class="icon icon-md"><use href="#icon-arrow-left"/></svg></button>
+        <button class="browser-btn" onclick="window.browser.goForward()" title="Avancer"><svg class="icon icon-md"><use href="#icon-arrow-right"/></svg></button>
+        <button class="browser-btn" onclick="window.browser.refresh()" title="Actualiser"><svg class="icon icon-md"><use href="#icon-refresh"/></svg></button>
+        <input type="text" class="browser-url-input" id="browserUrlInput" placeholder="https://..." onkeydown="if(event.key==='Enter')window.browser.navigateToUrl(this.value)">
+        <button class="browser-btn" onclick="window.browser.viewSource()" title="Code source"><svg class="icon icon-md"><use href="#icon-code"/></svg></button>
+        <button class="browser-btn" onclick="window.browser.openExternally()" title="Ouvrir en externe"><svg class="icon icon-md"><use href="#icon-external"/></svg></button>
+        <button class="browser-btn" onclick="window.app.returnToDashboard()" title="Tableau de bord"><svg class="icon icon-md"><use href="#icon-grid"/></svg></button>
+        <button class="browser-btn" onclick="window.browser.close()" title="Fermer"><svg class="icon icon-md"><use href="#icon-x"/></svg></button>
+      </div>
+      <div class="browser-iframe-container">
+        <iframe id="browserIframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation" allow="fullscreen"></iframe>
+        <div class="browser-error" id="browserError">
+          <p>⚠️ Ce site ne peut pas être affiché ici.</p>
+          <button class="btn-primary" style="width:auto;padding:8px 20px;" onclick="window.browser.openExternally()">Ouvrir quand même</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-source-modal" id="viewSourceModal">
+      <div class="view-source-content">
+        <div class="view-source-header">
+          <span style="font-weight:600;">Code source</span>
+          <button class="modal-close" onclick="document.getElementById('viewSourceModal').classList.remove('active')"><svg class="icon icon-md"><use href="#icon-x"/></svg></button>
+        </div>
+        <div class="view-source-body" id="viewSourceBody"></div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
   </div>
-
-  <!-- Panneau Paramètres -->
-  <div class="settings-panel" id="settingsPanel">
-    <div class="settings-header">
-      <button class="icon-btn" style="background:var(--bg);color:var(--text)" onclick="app.closeSettingsPanel()">
-        <svg class="icon icon-md"><use href="#icon-chevron-left"/></svg>
-      </button>
-      <span style="font-weight:700;font-size:1.2rem;">Paramètres</span>
-    </div>
-    <div class="settings-content">
-      <div class="setting-item" onclick="app.toggleTheme()">
-        <svg class="icon icon-md"><use href="#icon-moon"/></svg>
-        <span>Changer le thème</span>
-      </div>
-      <div class="setting-item" onclick="app.clearWorkspaceFolder()">
-        <svg class="icon icon-md"><use href="#icon-folder-minus"/></svg>
-        <span>Vider le dossier Workspace</span>
-      </div>
-      <div class="setting-item" onclick="app.exportData()">
-        <svg class="icon icon-md"><use href="#icon-download"/></svg>
-        <span>Exporter les données</span>
-      </div>
-      <div class="setting-item" onclick="app.clearAllData()" style="color:var(--danger)">
-        <svg class="icon icon-md" style="color:var(--danger)"><use href="#icon-trash"/></svg>
-        <span style="color:var(--danger)">Tout effacer</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Navigateur intégré -->
-  <div class="browser-panel" id="browserPanel">
-    <div class="browser-toolbar">
-      <button class="browser-btn" onclick="browser.goBack()" title="Retour">
-        <svg class="icon icon-md"><use href="#icon-arrow-left"/></svg>
-      </button>
-      <button class="browser-btn" onclick="browser.goForward()" title="Avancer">
-        <svg class="icon icon-md"><use href="#icon-arrow-right"/></svg>
-      </button>
-      <button class="browser-btn" onclick="browser.refresh()" title="Actualiser">
-        <svg class="icon icon-md"><use href="#icon-refresh"/></svg>
-      </button>
-      <input type="text" class="browser-url-input" id="browserUrlInput" placeholder="https://..." onkeydown="if(event.key==='Enter')browser.navigateToUrl(this.value)">
-      <button class="browser-btn" onclick="browser.openExternally()" title="Ouvrir dans un nouvel onglet">
-        <svg class="icon icon-md"><use href="#icon-external"/></svg>
-      </button>
-      <button class="browser-btn" onclick="browser.close()" title="Fermer le navigateur">
-        <svg class="icon icon-md"><use href="#icon-x"/></svg>
-      </button>
-    </div>
-    <div class="browser-iframe-container">
-      <iframe id="browserIframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation" allow="fullscreen"></iframe>
-      <div class="browser-error" id="browserError">
-        <p>⚠️ Ce site ne peut pas être affiché ici.</p>
-        <button class="btn-primary" style="width:auto;padding:8px 20px;" onclick="browser.openExternally()">Ouvrir quand même</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div class="toast" id="toast"></div>
 
   <script>
     (function() {
-      // ----- CONSTANTES -----
       const APP_LOGO = 'https://i.ibb.co/4RSj5MKR/Screenshot-20260424-065250-Whats-App-Business.jpg';
-      const APP_FOLDER = 'WorkspacePro';
-      const MAX_STORAGE_BYTES = 5 * 1024 * 1024; // 5 Mo
+      const MAX_STORAGE_BYTES = 5 * 1024 * 1024;
 
-      // ----- MANIFEST PWA -----
       const manifestData = {
         name: "Workspace Pro",
         short_name: "Workspace",
@@ -989,7 +1019,6 @@
       const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/manifest+json' });
       document.getElementById('manifestLink').href = URL.createObjectURL(manifestBlob);
 
-      // ----- SERVICE WORKER -----
       if ('serviceWorker' in navigator) {
         const swCode = `
           const CACHE_NAME = 'workspace-pro-v1';
@@ -1011,105 +1040,201 @@
         navigator.serviceWorker.register(URL.createObjectURL(swBlob));
       }
 
-      // ----- CLASSE APPLICATION -----
+      async function deriveKey(password, salt) {
+        const enc = new TextEncoder();
+        const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+        return crypto.subtle.deriveKey(
+          { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+          keyMaterial,
+          { name: 'AES-GCM', length: 256 },
+          false,
+          ['encrypt', 'decrypt']
+        );
+      }
+
+      async function encryptData(data, password) {
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const key = await deriveKey(password, salt);
+        const enc = new TextEncoder();
+        const ciphertext = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(data));
+        return { salt: Array.from(salt), iv: Array.from(iv), ciphertext: Array.from(new Uint8Array(ciphertext)) };
+      }
+
+      async function decryptData(encrypted, password) {
+        const salt = new Uint8Array(encrypted.salt);
+        const iv = new Uint8Array(encrypted.iv);
+        const ciphertext = new Uint8Array(encrypted.ciphertext);
+        const key = await deriveKey(password, salt);
+        const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext);
+        return new TextDecoder().decode(decrypted);
+      }
+
       class WorkspaceProApp {
         constructor() {
-          this.sites = JSON.parse(localStorage.getItem('workspace_sites')) || [];
+          this.sites = [];
           this.currentFilter = 'all';
-          this.deferredPrompt = null;
+          this.masterPassword = null;
+          this.lockTimer = null;
+          this.proxyUrl = localStorage.getItem('ws_proxy') || '';
+          this.dohUrl = localStorage.getItem('ws_doh') || 'https://cloudflare-dns.com/dns-query';
+        }
+
+        async init() {
+          document.getElementById('masterPasswordOverlay').style.display = 'flex';
+          document.getElementById('dohInput').value = this.dohUrl;
+          document.getElementById('proxyInput').value = this.proxyUrl;
+        }
+
+        async unlock(password) {
+          const encrypted = localStorage.getItem('ws_encrypted');
+          if (encrypted) {
+            try {
+              const decrypted = await decryptData(JSON.parse(encrypted), password);
+              this.sites = JSON.parse(decrypted);
+              this.masterPassword = password;
+              this.afterUnlock();
+              return true;
+            } catch (e) {
+              document.getElementById('mpError').style.display = 'block';
+              return false;
+            }
+          } else {
+            this.masterPassword = password;
+            await this.saveEncryptedSites();
+            this.afterUnlock();
+            return true;
+          }
+        }
+
+        async saveEncryptedSites() {
+          if (!this.masterPassword) return;
+          const plaintext = JSON.stringify(this.sites);
+          const encrypted = await encryptData(plaintext, this.masterPassword);
+          localStorage.setItem('ws_encrypted', JSON.stringify(encrypted));
+        }
+
+        afterUnlock() {
+          document.getElementById('masterPasswordOverlay').style.display = 'none';
+          document.getElementById('appContainer').style.display = 'block';
           this.initializeTheme();
           this.detectPublicIP();
           this.render();
           this.setupPWA();
-          this.createAppFolderMarker();
           this.updateStorageStats();
+          this.updateNetworkIndicators();
+          this.resetLockTimer();
         }
 
-        /* Thème */
+        lockApp() {
+          this.masterPassword = null;
+          document.getElementById('masterPasswordOverlay').style.display = 'flex';
+          document.getElementById('appContainer').style.display = 'none';
+          document.getElementById('masterPasswordInput').value = '';
+          document.getElementById('mpError').style.display = 'none';
+          if (this.lockTimer) clearTimeout(this.lockTimer);
+        }
+
+        resetLockTimer() {
+          if (this.lockTimer) clearTimeout(this.lockTimer);
+          this.lockTimer = setTimeout(() => {
+            if (this.masterPassword) {
+              this.lockApp();
+              this.showToast('Application verrouillée (inactivité)', 'warning');
+            }
+          }, 5 * 60 * 1000);
+        }
+
+        updateNetworkIndicators() {
+          document.getElementById('proxyStatus').textContent = this.proxyUrl ? 'Configuré' : 'Non configuré';
+          document.getElementById('dnsStatus').textContent = this.dohUrl.includes('cloudflare') ? 'Cloudflare' : (this.dohUrl ? 'Personnalisé' : 'Non configuré');
+        }
+
+        updateDoh(url) {
+          this.dohUrl = url;
+          localStorage.setItem('ws_doh', url);
+          this.updateNetworkIndicators();
+          this.showToast('DNS mis à jour', 'success');
+        }
+
+        updateProxy(url) {
+          this.proxyUrl = url;
+          localStorage.setItem('ws_proxy', url);
+          this.updateNetworkIndicators();
+          this.showToast('Proxy mis à jour', 'success');
+        }
+
         initializeTheme() {
           const savedTheme = localStorage.getItem('workspace_theme') || 'dark';
           this.applyTheme(savedTheme);
         }
+
         applyTheme(theme) {
           document.documentElement.setAttribute('data-theme', theme);
-          const themeIcon = document.getElementById('themeIcon');
-          if (themeIcon) {
-            themeIcon.innerHTML = theme === 'dark'
+          const icon = document.getElementById('themeIcon');
+          if (icon) {
+            icon.innerHTML = theme === 'dark'
               ? '<use href="#icon-moon"/>'
               : '<use href="#icon-sun"/>';
           }
         }
+
         toggleTheme() {
-          const currentTheme = document.documentElement.getAttribute('data-theme');
-          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-          localStorage.setItem('workspace_theme', newTheme);
-          this.applyTheme(newTheme);
+          const current = document.documentElement.getAttribute('data-theme');
+          const next = current === 'dark' ? 'light' : 'dark';
+          localStorage.setItem('workspace_theme', next);
+          this.applyTheme(next);
+          this.resetLockTimer();
         }
 
-        /* Dossier */
-        createAppFolderMarker() {
-          if (!localStorage.getItem('workspace_folder_created')) {
-            localStorage.setItem('workspace_folder_created', 'true');
-            localStorage.setItem('workspace_app_folder', APP_FOLDER);
-          }
-        }
-
-        /* Stockage */
         updateStorageStats() {
-          const sitesData = JSON.stringify(this.sites);
-          const storageUsed = new Blob([sitesData]).size;
-          const percentage = (storageUsed / MAX_STORAGE_BYTES) * 100;
-          document.getElementById('storageUsage').textContent = this.formatBytes(storageUsed);
-          document.getElementById('storageBar').style.width = `${Math.min(percentage, 100)}%`;
-          document.getElementById('dataUsage').textContent = this.formatBytes(storageUsed);
-          document.getElementById('dataBar').style.width = `${Math.min(percentage, 100)}%`;
+          const total = new Blob([JSON.stringify(this.sites)]).size;
+          const pct = Math.min((total / MAX_STORAGE_BYTES) * 100, 100);
+          document.getElementById('storageUsage').textContent = this.formatBytes(total);
+          document.getElementById('storageBar').style.width = pct + '%';
+          document.getElementById('dataUsage').textContent = this.formatBytes(total);
+          document.getElementById('dataBar').style.width = pct + '%';
         }
+
         formatBytes(bytes) {
           if (bytes === 0) return '0 Bytes';
           const units = ['Bytes', 'KB', 'MB', 'GB'];
-          const index = Math.floor(Math.log(bytes) / Math.log(1024));
-          return parseFloat((bytes / Math.pow(1024, index)).toFixed(2)) + ' ' + units[index];
+          const i = Math.floor(Math.log(bytes) / Math.log(1024));
+          return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + units[i];
         }
 
-        /* IP */
         async detectPublicIP() {
           try {
-            const response = await fetch('https://api.ipify.org?format=json');
-            const data = await response.json();
+            const resp = await fetch('https://api.ipify.org?format=json');
+            const data = await resp.json();
             document.getElementById('publicIp').textContent = data.ip;
           } catch {
             document.getElementById('publicIp').textContent = 'N/A';
           }
         }
 
-        /* Rendu */
         render() {
           const grid = document.getElementById('sitesGrid');
           let data = [...this.sites];
-          if (this.currentFilter === 'favorites') data = data.filter(s => s.favorite);
-          else if (this.currentFilter === 'visited') data.sort((a, b) => (b.visits || 0) - (a.visits || 0));
-          else if (this.currentFilter === 'recent') data.sort((a, b) => (b.lastVisit || 0) - (a.lastVisit || 0));
+          if (this.currentFilter === 'favorites') {
+            data = data.filter(s => s.favorite);
+          } else if (this.currentFilter === 'visited') {
+            data.sort((a, b) => (b.visits || 0) - (a.visits || 0));
+          } else if (this.currentFilter === 'recent') {
+            data.sort((a, b) => (b.lastVisit || 0) - (a.lastVisit || 0));
+          }
 
           if (data.length === 0) {
-            grid.innerHTML = `
-              <div class="empty-state">
-                <svg class="empty-icon" viewBox="0 0 24 24"><use href="#icon-folder-open"/></svg>
-                <div class="empty-title">Aucun site</div>
-                <p>Clique sur + pour ajouter un site</p>
-              </div>`;
+            grid.innerHTML = `<div class="empty-state"><svg class="empty-icon"><use href="#icon-folder"/></svg><div class="empty-title">Aucun site</div><p>Ajoutez-en un avec +</p></div>`;
             return;
           }
 
           grid.innerHTML = data.map(site => `
-            <div class="site-card" onclick="app.launchSite(${site.id})">
+            <div class="site-card" onclick="window.app.launchSite(${site.id})">
               <div class="site-header">
-                <div class="site-icon">
-                  ${site.icon ? `<img src="${site.icon}" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='🌐'">` : '🌐'}
-                </div>
+                <div class="site-icon">${site.icon ? `<img src="${site.icon}" onerror="this.style.display='none';this.parentElement.innerHTML='🌐'">` : '🌐'}</div>
                 <div class="site-actions">
-                  <button class="site-action delete" onclick="event.stopPropagation();app.deleteSite(${site.id})">
-                    <svg width="14" height="14" viewBox="0 0 24 24"><use href="#icon-trash"/></svg>
-                  </button>
+                  <button class="site-action delete" onclick="event.stopPropagation();window.app.deleteSite(${site.id})"><svg width="14" height="14"><use href="#icon-trash"/></svg></button>
                 </div>
               </div>
               <div class="site-name">${this.escapeHtml(site.name)}</div>
@@ -1123,107 +1248,127 @@
           `).join('');
           this.updateStorageStats();
         }
+
         escapeHtml(text) {
-          const el = document.createElement('div');
-          el.textContent = text;
-          return el.innerHTML;
-        }
-        getDomain(url) {
-          try { return new URL(url).hostname.replace('www.', ''); }
-          catch { return url; }
+          const d = document.createElement('div');
+          d.textContent = text;
+          return d.innerHTML;
         }
 
-        /* Sites */
-        saveSite() {
-          const urlInput = document.getElementById('siteUrl');
-          const nameInput = document.getElementById('siteName');
-          const emailInput = document.getElementById('siteEmail');
-          const passInput = document.getElementById('sitePass');
-          let url = urlInput.value.trim();
-          const name = nameInput.value.trim();
-          if (!url) { this.showToast('URL requise', 'error'); return; }
-          if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
-          this.sites.unshift({
+        getDomain(url) {
+          try {
+            return new URL(url).hostname.replace('www.', '');
+          } catch {
+            return url;
+          }
+        }
+
+        async saveSite() {
+          const url = document.getElementById('siteUrl').value.trim();
+          const name = document.getElementById('siteName').value.trim();
+          if (!url) {
+            this.showToast('URL requise', 'error');
+            return;
+          }
+          const fullUrl = /^https?:\/\//i.test(url) ? url : 'https://' + url;
+          const newSite = {
             id: Date.now(),
-            url,
-            name: name || this.getDomain(url),
-            icon: `https://www.google.com/s2/favicons?domain=${this.getDomain(url)}&sz=64`,
-            email: emailInput.value.trim(),
-            password: btoa(passInput.value || ''),
+            url: fullUrl,
+            name: name || this.getDomain(fullUrl),
+            icon: `https://www.google.com/s2/favicons?domain=${this.getDomain(fullUrl)}&sz=64`,
+            email: document.getElementById('siteEmail').value.trim(),
+            password: btoa(document.getElementById('sitePass').value || ''),
             favorite: false,
             visits: 0,
             lastVisit: Date.now()
-          });
-          localStorage.setItem('workspace_sites', JSON.stringify(this.sites));
-          urlInput.value = nameInput.value = emailInput.value = passInput.value = '';
+          };
+          this.sites.unshift(newSite);
+          await this.saveEncryptedSites();
+          ['siteUrl', 'siteName', 'siteEmail', 'sitePass'].forEach(id => document.getElementById(id).value = '');
           this.closeModal('addModal');
           this.render();
           this.showToast('Site ajouté', 'success');
         }
+
         launchSite(id) {
           const site = this.sites.find(s => s.id === id);
           if (!site) return;
           site.visits = (site.visits || 0) + 1;
           site.lastVisit = Date.now();
-          localStorage.setItem('workspace_sites', JSON.stringify(this.sites));
+          this.saveEncryptedSites();
           this.render();
-          browser.open(site.url);
+          window.browser.open(site.url);
         }
-        deleteSite(id) {
+
+        async deleteSite(id) {
           if (!confirm('Supprimer ce site ?')) return;
           this.sites = this.sites.filter(s => s.id !== id);
-          localStorage.setItem('workspace_sites', JSON.stringify(this.sites));
+          await this.saveEncryptedSites();
           this.render();
           this.showToast('Site supprimé', 'success');
         }
 
-        /* Filtres */
-        setFilter(filter, element) {
+        setFilter(filter, el) {
           this.currentFilter = filter;
           document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
           document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-          if (element) element.classList.add('active');
+          if (el) el.classList.add('active');
           this.render();
         }
-        searchSites(query) {
-          if (!query.trim()) {
-            this.sites = JSON.parse(localStorage.getItem('workspace_sites')) || [];
-          } else {
-            const lower = query.toLowerCase();
-            this.sites = (JSON.parse(localStorage.getItem('workspace_sites')) || []).filter(s =>
-              s.name.toLowerCase().includes(lower) || s.url.toLowerCase().includes(lower)
-            );
+
+        searchSites(q) {
+          if (!q.trim()) {
+            this.render();
+            return;
           }
+          const lower = q.toLowerCase();
+          const allSites = JSON.parse(JSON.stringify(this.sites));
+          this.sites = allSites.filter(s => s.name.toLowerCase().includes(lower) || s.url.toLowerCase().includes(lower));
           this.render();
+          this.sites = allSites;
         }
 
-        /* Modales */
-        openAddModal() { document.getElementById('addModal').classList.add('active'); }
-        closeModal(id) { document.getElementById(id).classList.remove('active'); }
-        openSettingsPanel() { document.getElementById('settingsPanel').classList.add('open'); }
-        closeSettingsPanel() { document.getElementById('settingsPanel').classList.remove('open'); }
+        openAddModal() {
+          document.getElementById('addModal').classList.add('active');
+        }
 
-        /* Paramètres */
-        clearWorkspaceFolder() {
+        closeModal(id) {
+          document.getElementById(id).classList.remove('active');
+        }
+
+        openSettingsPanel() {
+          document.getElementById('settingsPanel').classList.add('open');
+          document.getElementById('dohInput').value = this.dohUrl;
+          document.getElementById('proxyInput').value = this.proxyUrl;
+          this.resetLockTimer();
+        }
+
+        closeSettingsPanel() {
+          document.getElementById('settingsPanel').classList.remove('open');
+        }
+
+        async clearWorkspaceFolder() {
           if (!confirm('Vider le dossier Workspace Pro ?')) return;
-          localStorage.removeItem('workspace_sites');
-          localStorage.removeItem('workspace_folder_created');
-          localStorage.removeItem('workspace_app_folder');
           this.sites = [];
+          await this.saveEncryptedSites();
           this.render();
           this.showToast('Dossier vidé', 'success');
         }
-        clearAllData() {
+
+        async clearAllData() {
           if (!confirm('Tout effacer définitivement ?')) return;
-          localStorage.removeItem('workspace_sites');
-          localStorage.removeItem('workspace_folder_created');
-          localStorage.removeItem('workspace_app_folder');
           this.sites = [];
+          localStorage.removeItem('ws_encrypted');
           this.render();
           this.showToast('Données effacées', 'warning');
+          this.lockApp();
         }
+
         exportData() {
-          if (this.sites.length === 0) { this.showToast('Aucune donnée', 'warning'); return; }
+          if (this.sites.length === 0) {
+            this.showToast('Aucune donnée à exporter', 'warning');
+            return;
+          }
           const blob = new Blob([JSON.stringify(this.sites, null, 2)], { type: 'application/json' });
           const a = document.createElement('a');
           a.href = URL.createObjectURL(blob);
@@ -1232,16 +1377,19 @@
           this.showToast('Export réussi', 'success');
         }
 
-        /* Toast */
-        showToast(msg, type = 'success') {
-          const toast = document.getElementById('toast');
-          toast.className = `toast ${type} show`;
-          toast.textContent = msg;
-          clearTimeout(this._toastTimer);
-          this._toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+        returnToDashboard() {
+          window.browser.close();
+          this.resetLockTimer();
         }
 
-        /* PWA */
+        showToast(msg, type = 'success') {
+          const t = document.getElementById('toast');
+          t.className = `toast ${type} show`;
+          t.textContent = msg;
+          clearTimeout(this._tt);
+          this._tt = setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
         setupPWA() {
           window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
@@ -1250,7 +1398,6 @@
         }
       }
 
-      // ----- CLASSE NAVIGATEUR -----
       class Browser {
         constructor() {
           this.panel = document.getElementById('browserPanel');
@@ -1262,10 +1409,10 @@
           this.historyIndex = -1;
           this._setupErrorDetection();
         }
+
         _setupErrorDetection() {
           this.iframe.addEventListener('load', () => {
             this.errorDiv.style.display = 'none';
-            // Vérification après un court délai
             setTimeout(() => {
               try {
                 const doc = this.iframe.contentDocument;
@@ -1275,51 +1422,74 @@
               } catch (e) {
                 this.errorDiv.style.display = 'block';
               }
-            }, 1000);
+            }, 2000);
           });
         }
+
         open(url) {
           this.panel.classList.add('active');
           this.navigateToUrl(url);
         }
+
         navigateToUrl(url) {
           if (!url) return;
           if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
           this.currentUrl = url;
           this.urlInput.value = url;
           this.errorDiv.style.display = 'none';
-          this.iframe.src = url;
-          // Historique
+          const proxy = localStorage.getItem('ws_proxy');
+          this.iframe.src = proxy ? proxy + encodeURIComponent(url) : url;
           if (this.historyIndex < this.history.length - 1) {
             this.history = this.history.slice(0, this.historyIndex + 1);
           }
           this.history.push(url);
           this.historyIndex = this.history.length - 1;
         }
+
         goBack() {
           if (this.historyIndex > 0) {
             this.historyIndex--;
             this._loadSilent(this.history[this.historyIndex]);
           }
         }
+
         goForward() {
           if (this.historyIndex < this.history.length - 1) {
             this.historyIndex++;
             this._loadSilent(this.history[this.historyIndex]);
           }
         }
+
         _loadSilent(url) {
           this.currentUrl = url;
           this.urlInput.value = url;
           this.errorDiv.style.display = 'none';
-          this.iframe.src = url;
+          const proxy = localStorage.getItem('ws_proxy');
+          this.iframe.src = proxy ? proxy + encodeURIComponent(url) : url;
         }
+
         refresh() {
           this._loadSilent(this.currentUrl);
         }
+
+        async viewSource() {
+          if (!this.currentUrl) return;
+          try {
+            const proxy = localStorage.getItem('ws_proxy');
+            const fetchUrl = proxy ? proxy + encodeURIComponent(this.currentUrl) : this.currentUrl;
+            const resp = await fetch(fetchUrl);
+            const text = await resp.text();
+            document.getElementById('viewSourceBody').textContent = text;
+            document.getElementById('viewSourceModal').classList.add('active');
+          } catch (e) {
+            window.app.showToast('Impossible de récupérer le code source', 'error');
+          }
+        }
+
         openExternally() {
           if (this.currentUrl) window.open(this.currentUrl, '_blank');
         }
+
         close() {
           this.panel.classList.remove('active');
           this.iframe.src = 'about:blank';
@@ -1329,9 +1499,20 @@
         }
       }
 
-      // Initialisation
-      window.browser = new Browser();
       window.app = new WorkspaceProApp();
+      window.browser = new Browser();
+      window.app.init();
+
+      window.unlockApp = async function() {
+        const password = document.getElementById('masterPasswordInput').value;
+        if (!password) return;
+        const success = await window.app.unlock(password);
+        if (success) {
+          ['click', 'keypress', 'scroll', 'mousemove'].forEach(evt => {
+            document.addEventListener(evt, () => window.app.resetLockTimer(), { once: false, passive: true });
+          });
+        }
+      };
     })();
   </script>
 </body>
