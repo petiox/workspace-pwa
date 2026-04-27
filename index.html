@@ -9,13 +9,10 @@
   <meta name="apple-mobile-web-app-title" content="Workspace Pro">
   <title>Workspace Pro</title>
 
-  <!-- Icône de l'application -->
   <link rel="apple-touch-icon" href="https://i.ibb.co/4RSj5MKR/Screenshot-20260424-065250-Whats-App-Business.jpg">
   <link rel="manifest" id="manifestLink">
 
-  <!-- Styles propres et organisés -->
   <style>
-    /* ----- VARIABLES ----- */
     :root {
       --primary: #3b82f6;
       --secondary: #8b5cf6;
@@ -30,7 +27,6 @@
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
       --radius: 12px;
     }
-
     [data-theme="light"] {
       --bg: #f8fafc;
       --surface: #ffffff;
@@ -40,17 +36,13 @@
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
-    /* ----- RESET & BASE ----- */
-    *,
-    *::before,
-    *::after {
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -59,11 +51,9 @@
       transition: background 0.3s, color 0.3s;
     }
 
-    /* ----- ICÔNES SVG ----- */
     .icon-sprite {
       display: none;
     }
-
     .icon {
       display: inline-block;
       width: 24px;
@@ -75,20 +65,30 @@
       fill: none;
       vertical-align: middle;
     }
+    .icon-sm {
+      width: 16px;
+      height: 16px;
+    }
+    .icon-md {
+      width: 20px;
+      height: 20px;
+    }
+    .icon-lg {
+      width: 28px;
+      height: 28px;
+    }
+    .icon-xl {
+      width: 32px;
+      height: 32px;
+    }
 
-    .icon-sm { width: 16px; height: 16px; }
-    .icon-md { width: 20px; height: 20px; }
-    .icon-lg { width: 28px; height: 28px; }
-    .icon-xl { width: 32px; height: 32px; }
-
-    /* ----- HEADER ----- */
+    /* Header */
     .header {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       padding: 24px 16px 20px;
       position: relative;
       overflow: hidden;
     }
-
     .header::before {
       content: '';
       position: absolute;
@@ -99,7 +99,6 @@
       background: rgba(255, 255, 255, 0.1);
       border-radius: 50%;
     }
-
     .header-content {
       display: flex;
       justify-content: space-between;
@@ -107,13 +106,11 @@
       position: relative;
       z-index: 1;
     }
-
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
     }
-
     .brand-icon {
       width: 48px;
       height: 48px;
@@ -126,25 +123,21 @@
       border: 2px solid rgba(255, 255, 255, 0.3);
       color: #fff;
     }
-
     .brand-text h1 {
       font-size: 1.4rem;
       font-weight: 800;
       color: #fff;
       margin: 0;
     }
-
     .brand-text p {
       font-size: 0.85rem;
       color: rgba(255, 255, 255, 0.9);
       margin: 0;
     }
-
     .header-actions {
       display: flex;
       gap: 8px;
     }
-
     .icon-btn {
       width: 40px;
       height: 40px;
@@ -159,12 +152,11 @@
       backdrop-filter: blur(8px);
       transition: background 0.2s;
     }
-
     .icon-btn:active {
       background: rgba(255, 255, 255, 0.3);
     }
 
-    /* ----- CARTES RÉSEAU ----- */
+    /* Network */
     .network-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -174,7 +166,6 @@
       position: relative;
       z-index: 10;
     }
-
     .network-card {
       background: var(--surface);
       padding: 14px 8px;
@@ -183,25 +174,22 @@
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
     }
-
     .network-card .icon {
       color: var(--primary);
       margin: 0 auto 6px;
       display: block;
     }
-
     .network-label {
       font-size: 0.75rem;
       color: var(--text-muted);
       margin-bottom: 4px;
     }
-
     .network-value {
       font-size: 0.9rem;
       font-weight: 700;
     }
 
-    /* ----- CARTES STOCKAGE ----- */
+    /* Storage */
     .storage-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -209,7 +197,6 @@
       padding: 0 16px;
       margin-bottom: 16px;
     }
-
     .storage-card {
       background: var(--surface);
       padding: 12px;
@@ -217,30 +204,25 @@
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
     }
-
     .storage-header {
       display: flex;
       align-items: center;
       gap: 8px;
       margin-bottom: 8px;
     }
-
     .storage-header .icon {
       color: var(--primary);
     }
-
     .storage-title {
       font-size: 0.8rem;
       color: var(--text-muted);
       font-weight: 600;
     }
-
     .storage-value {
       font-size: 1rem;
       font-weight: 700;
       color: var(--text);
     }
-
     .storage-bar {
       height: 4px;
       background: var(--bg);
@@ -248,7 +230,6 @@
       overflow: hidden;
       margin-top: 6px;
     }
-
     .storage-progress {
       height: 100%;
       background: linear-gradient(90deg, var(--primary), var(--secondary));
@@ -256,11 +237,10 @@
       transition: width 0.3s;
     }
 
-    /* ----- RECHERCHE ----- */
+    /* Search */
     .search-box {
       padding: 0 16px 12px;
     }
-
     .search-input {
       display: flex;
       align-items: center;
@@ -271,11 +251,9 @@
       padding: 0 14px;
       height: 48px;
     }
-
     .search-input .icon {
       color: var(--text-muted);
     }
-
     .search-input input {
       flex: 1;
       border: none;
@@ -284,12 +262,11 @@
       font-size: 1rem;
       outline: none;
     }
-
     .search-input input::placeholder {
       color: var(--text-muted);
     }
 
-    /* ----- FILTRES ----- */
+    /* Filters */
     .filters {
       display: flex;
       gap: 8px;
@@ -297,11 +274,9 @@
       overflow-x: auto;
       scrollbar-width: none;
     }
-
     .filters::-webkit-scrollbar {
       display: none;
     }
-
     .chip {
       padding: 8px 16px;
       background: var(--surface);
@@ -315,21 +290,19 @@
       transition: all 0.2s;
       user-select: none;
     }
-
     .chip.active {
       background: var(--primary);
       color: #fff;
       border-color: var(--primary);
     }
 
-    /* ----- GRILLE DES SITES ----- */
+    /* Sites Grid */
     .sites-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       gap: 12px;
-      padding: 0 16px 20px;
+      padding: 0 16px;
     }
-
     .site-card {
       background: var(--surface);
       border-radius: var(--radius);
@@ -338,21 +311,17 @@
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-
     .site-card:active {
       transform: scale(0.97);
     }
-
     .site-card:hover {
       box-shadow: var(--shadow);
     }
-
     .site-header {
       display: flex;
       justify-content: space-between;
       margin-bottom: 10px;
     }
-
     .site-icon {
       width: 48px;
       height: 48px;
@@ -365,18 +334,15 @@
       border: 1px solid var(--border);
       overflow: hidden;
     }
-
     .site-icon img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-
     .site-actions {
       display: flex;
       gap: 4px;
     }
-
     .site-action {
       width: 28px;
       height: 28px;
@@ -389,12 +355,10 @@
       align-items: center;
       justify-content: center;
     }
-
     .site-action.delete:hover {
       background: var(--danger);
       color: #fff;
     }
-
     .site-name {
       font-weight: 700;
       margin-bottom: 3px;
@@ -402,7 +366,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
     .site-url {
       font-size: 0.85rem;
       color: var(--text-muted);
@@ -411,13 +374,11 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
     .site-badges {
       display: flex;
       gap: 5px;
       flex-wrap: wrap;
     }
-
     .badge {
       padding: 3px 7px;
       border-radius: 5px;
@@ -427,17 +388,14 @@
       align-items: center;
       gap: 3px;
     }
-
     .badge-fav {
       background: rgba(251, 191, 36, 0.15);
       color: #fbbf24;
     }
-
     .badge-secure {
       background: rgba(16, 185, 129, 0.15);
       color: var(--success);
     }
-
     .badge-visits {
       background: var(--bg);
       color: var(--text-muted);
@@ -449,14 +407,12 @@
       color: var(--text-muted);
       grid-column: 1 / -1;
     }
-
     .empty-icon {
       width: 100px;
       height: 100px;
       margin: 0 auto 16px;
       opacity: 0.3;
     }
-
     .empty-title {
       font-size: 1.1rem;
       font-weight: 700;
@@ -464,7 +420,7 @@
       color: var(--text);
     }
 
-    /* ----- BOUTON FLOTTANT ----- */
+    /* FAB */
     .fab {
       position: fixed;
       bottom: 90px;
@@ -484,7 +440,7 @@
       justify-content: center;
     }
 
-    /* ----- NAVIGATION INFÉRIEURE ----- */
+    /* Bottom Nav */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -499,7 +455,6 @@
       box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
       z-index: 50;
     }
-
     .nav-item {
       display: flex;
       flex-direction: column;
@@ -514,23 +469,20 @@
       transition: all 0.2s;
       font-size: inherit;
     }
-
     .nav-item.active {
       color: var(--primary);
       background: rgba(59, 130, 246, 0.1);
     }
-
     .nav-item .icon {
       width: 22px;
       height: 22px;
     }
-
     .nav-label {
       font-size: 0.7rem;
       font-weight: 600;
     }
 
-    /* ----- MODALE ----- */
+    /* Modal */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -541,11 +493,9 @@
       align-items: flex-end;
       justify-content: center;
     }
-
     .modal-overlay.active {
       display: flex;
     }
-
     .modal {
       background: var(--surface);
       width: 100%;
@@ -556,12 +506,14 @@
       border: 1px solid var(--border);
       border-bottom: none;
     }
-
     @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
     }
-
     .modal-header {
       padding: 16px 20px;
       border-bottom: 1px solid var(--border);
@@ -569,12 +521,10 @@
       justify-content: space-between;
       align-items: center;
     }
-
     .modal-title {
       font-size: 1.2rem;
       font-weight: 700;
     }
-
     .modal-close {
       width: 36px;
       height: 36px;
@@ -587,66 +537,13 @@
       align-items: center;
       justify-content: center;
     }
-
     .modal-content {
       padding: 20px;
       overflow-y: auto;
       max-height: calc(85vh - 70px);
     }
 
-    .form-group {
-      margin-bottom: 14px;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 12px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: var(--text);
-      font-size: 1rem;
-    }
-
-    .form-input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    .btn-primary {
-      width: 100%;
-      padding: 13px;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 8px;
-    }
-
-    .btn-secondary {
-      width: 100%;
-      padding: 12px;
-      background: var(--bg);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 8px;
-    }
-
-    /* ----- PANNEAU PARAMÈTRES ----- */
+    /* Settings */
     .settings-panel {
       position: fixed;
       top: 0;
@@ -661,11 +558,9 @@
       flex-direction: column;
       border-right: 1px solid var(--border);
     }
-
     .settings-panel.open {
       left: 0;
     }
-
     .settings-header {
       padding: 16px 20px;
       border-bottom: 1px solid var(--border);
@@ -673,13 +568,11 @@
       align-items: center;
       gap: 10px;
     }
-
     .settings-content {
       padding: 16px 20px;
       overflow-y: auto;
       flex: 1;
     }
-
     .setting-item {
       padding: 14px;
       background: var(--bg);
@@ -691,12 +584,86 @@
       gap: 12px;
       font-weight: 500;
     }
-
     .setting-item .icon {
       color: var(--primary);
     }
 
-    /* ----- TOAST ----- */
+    /* Browser */
+    .browser-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      z-index: 300;
+      display: none;
+      flex-direction: column;
+    }
+    .browser-panel.active {
+      display: flex;
+    }
+    .browser-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .browser-url-input {
+      flex: 1;
+      padding: 8px 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .browser-btn {
+      width: 36px;
+      height: 36px;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .browser-btn:active {
+      background: var(--bg);
+    }
+    .browser-iframe-container {
+      flex: 1;
+      position: relative;
+      background: #fff;
+    }
+    .browser-iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .browser-error {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--surface);
+      padding: 20px;
+      border-radius: var(--radius);
+      text-align: center;
+      color: var(--text);
+      box-shadow: var(--shadow);
+    }
+
+    /* Toast */
     .toast {
       position: fixed;
       bottom: 100px;
@@ -706,31 +673,75 @@
       padding: 12px 20px;
       border-radius: 10px;
       box-shadow: var(--shadow);
-      z-index: 300;
+      z-index: 400;
       opacity: 0;
       transition: all 0.3s ease;
       font-weight: 600;
       border-left: 4px solid var(--success);
       pointer-events: none;
     }
-
     .toast.show {
       transform: translateX(-50%) translateY(0);
       opacity: 1;
     }
-
     .toast.error {
       border-left-color: var(--danger);
     }
-
     .toast.warning {
       border-left-color: var(--warning);
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .btn-primary {
+      width: 100%;
+      padding: 13px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .btn-secondary {
+      width: 100%;
+      padding: 12px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Collection d'icônes SVG (symboles) -->
+  <!-- Icônes SVG -->
   <svg class="icon-sprite">
     <symbol id="icon-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
     <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
@@ -751,9 +762,14 @@
     <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
     <symbol id="icon-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></symbol>
     <symbol id="icon-folder-minus" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="8" y1="14" x2="16" y2="14"/></symbol>
+    <symbol id="icon-arrow-left" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></symbol>
+    <symbol id="icon-arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
+    <symbol id="icon-refresh" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></symbol>
+    <symbol id="icon-external" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol>
+    <symbol id="icon-folder-open" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
   </svg>
 
-  <!-- EN-TÊTE PRINCIPAL -->
+  <!-- Header -->
   <header class="header">
     <div class="header-content">
       <div class="brand">
@@ -776,7 +792,7 @@
     </div>
   </header>
 
-  <!-- CARTES RÉSEAU -->
+  <!-- Network -->
   <div class="network-grid">
     <div class="network-card">
       <svg class="icon icon-lg"><use href="#icon-globe"/></svg>
@@ -795,7 +811,7 @@
     </div>
   </div>
 
-  <!-- CARTES STOCKAGE & DONNÉES -->
+  <!-- Storage -->
   <div class="storage-grid">
     <div class="storage-card">
       <div class="storage-header">
@@ -815,7 +831,7 @@
     </div>
   </div>
 
-  <!-- BARRE DE RECHERCHE -->
+  <!-- Search -->
   <div class="search-box">
     <div class="search-input">
       <svg class="icon icon-md"><use href="#icon-search"/></svg>
@@ -823,7 +839,7 @@
     </div>
   </div>
 
-  <!-- FILTRES -->
+  <!-- Filters -->
   <div class="filters">
     <div class="chip active" onclick="app.setFilter('all', this)">Tous</div>
     <div class="chip" onclick="app.setFilter('favorites', this)">Favoris</div>
@@ -831,15 +847,15 @@
     <div class="chip" onclick="app.setFilter('recent', this)">Récents</div>
   </div>
 
-  <!-- GRILLE DES SITES -->
+  <!-- Sites Grid -->
   <div class="sites-grid" id="sitesGrid"></div>
 
-  <!-- BOUTON FLOTTANT D'AJOUT -->
+  <!-- FAB -->
   <button class="fab" onclick="app.openAddModal()">
     <svg class="icon icon-xl"><use href="#icon-plus"/></svg>
   </button>
 
-  <!-- NAVIGATION INFÉRIEURE -->
+  <!-- Bottom Nav -->
   <nav class="bottom-nav">
     <button class="nav-item active" onclick="app.setFilter('all', this)">
       <svg class="icon"><use href="#icon-grid"/></svg>
@@ -855,7 +871,7 @@
     </button>
   </nav>
 
-  <!-- MODALE D'AJOUT DE SITE -->
+  <!-- Modal Ajout -->
   <div class="modal-overlay" id="addModal">
     <div class="modal">
       <div class="modal-header">
@@ -887,7 +903,7 @@
     </div>
   </div>
 
-  <!-- PANNEAU DES PARAMÈTRES -->
+  <!-- Panneau Paramètres -->
   <div class="settings-panel" id="settingsPanel">
     <div class="settings-header">
       <button class="icon-btn" style="background:var(--bg);color:var(--text)" onclick="app.closeSettingsPanel()">
@@ -915,7 +931,36 @@
     </div>
   </div>
 
-  <!-- TOAST DE NOTIFICATION -->
+  <!-- Navigateur intégré -->
+  <div class="browser-panel" id="browserPanel">
+    <div class="browser-toolbar">
+      <button class="browser-btn" onclick="browser.goBack()" title="Retour">
+        <svg class="icon icon-md"><use href="#icon-arrow-left"/></svg>
+      </button>
+      <button class="browser-btn" onclick="browser.goForward()" title="Avancer">
+        <svg class="icon icon-md"><use href="#icon-arrow-right"/></svg>
+      </button>
+      <button class="browser-btn" onclick="browser.refresh()" title="Actualiser">
+        <svg class="icon icon-md"><use href="#icon-refresh"/></svg>
+      </button>
+      <input type="text" class="browser-url-input" id="browserUrlInput" placeholder="https://..." onkeydown="if(event.key==='Enter')browser.navigateToUrl(this.value)">
+      <button class="browser-btn" onclick="browser.openExternally()" title="Ouvrir dans un nouvel onglet">
+        <svg class="icon icon-md"><use href="#icon-external"/></svg>
+      </button>
+      <button class="browser-btn" onclick="browser.close()" title="Fermer le navigateur">
+        <svg class="icon icon-md"><use href="#icon-x"/></svg>
+      </button>
+    </div>
+    <div class="browser-iframe-container">
+      <iframe id="browserIframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation" allow="fullscreen"></iframe>
+      <div class="browser-error" id="browserError">
+        <p>⚠️ Ce site ne peut pas être affiché ici.</p>
+        <button class="btn-primary" style="width:auto;padding:8px 20px;" onclick="browser.openExternally()">Ouvrir quand même</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
   <div class="toast" id="toast"></div>
 
   <script>
@@ -923,9 +968,9 @@
       // ----- CONSTANTES -----
       const APP_LOGO = 'https://i.ibb.co/4RSj5MKR/Screenshot-20260424-065250-Whats-App-Business.jpg';
       const APP_FOLDER = 'WorkspacePro';
-      const MAX_STORAGE_BYTES = 5 * 1024 * 1024; // 5 Mo (limite typique de localStorage)
+      const MAX_STORAGE_BYTES = 5 * 1024 * 1024; // 5 Mo
 
-      // ----- MANIFESTE PWA DYNAMIQUE -----
+      // ----- MANIFEST PWA -----
       const manifestData = {
         name: "Workspace Pro",
         short_name: "Workspace",
@@ -941,44 +986,37 @@
         ],
         categories: ["productivity", "business", "utilities"]
       };
-
       const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/manifest+json' });
       document.getElementById('manifestLink').href = URL.createObjectURL(manifestBlob);
 
-      // ----- SERVICE WORKER (simplifié) -----
+      // ----- SERVICE WORKER -----
       if ('serviceWorker' in navigator) {
-        const serviceWorkerCode = `
+        const swCode = `
           const CACHE_NAME = 'workspace-pro-v1';
           const ASSETS = ['.', '/index.html', '${APP_LOGO}'];
-          
           self.addEventListener('install', (event) => {
             event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
             self.skipWaiting();
           });
-          
           self.addEventListener('activate', (event) => {
             event.waitUntil(clients.claim());
           });
-          
           self.addEventListener('fetch', (event) => {
             event.respondWith(
               caches.match(event.request).then((response) => response || fetch(event.request).catch(() => new Response('Offline')))
             );
           });
         `;
-        const swBlob = new Blob([serviceWorkerCode], { type: 'application/javascript' });
+        const swBlob = new Blob([swCode], { type: 'application/javascript' });
         navigator.serviceWorker.register(URL.createObjectURL(swBlob));
       }
 
-      // ----- CLASSE PRINCIPALE DE L'APPLICATION -----
+      // ----- CLASSE APPLICATION -----
       class WorkspaceProApp {
         constructor() {
-          // Chargement des sites depuis le stockage local
           this.sites = JSON.parse(localStorage.getItem('workspace_sites')) || [];
           this.currentFilter = 'all';
           this.deferredPrompt = null;
-
-          // Initialisation
           this.initializeTheme();
           this.detectPublicIP();
           this.render();
@@ -987,23 +1025,20 @@
           this.updateStorageStats();
         }
 
-        /* ---------- GESTION DU THÈME ---------- */
+        /* Thème */
         initializeTheme() {
           const savedTheme = localStorage.getItem('workspace_theme') || 'dark';
           this.applyTheme(savedTheme);
         }
-
         applyTheme(theme) {
           document.documentElement.setAttribute('data-theme', theme);
           const themeIcon = document.getElementById('themeIcon');
           if (themeIcon) {
-            // Icône lune pour thème sombre, soleil pour thème clair
             themeIcon.innerHTML = theme === 'dark'
               ? '<use href="#icon-moon"/>'
               : '<use href="#icon-sun"/>';
           }
         }
-
         toggleTheme() {
           const currentTheme = document.documentElement.getAttribute('data-theme');
           const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -1011,7 +1046,7 @@
           this.applyTheme(newTheme);
         }
 
-        /* ---------- STOCKAGE LOCAL (SIMULATION DE DOSSIER) ---------- */
+        /* Dossier */
         createAppFolderMarker() {
           if (!localStorage.getItem('workspace_folder_created')) {
             localStorage.setItem('workspace_folder_created', 'true');
@@ -1019,17 +1054,16 @@
           }
         }
 
+        /* Stockage */
         updateStorageStats() {
           const sitesData = JSON.stringify(this.sites);
           const storageUsed = new Blob([sitesData]).size;
           const percentage = (storageUsed / MAX_STORAGE_BYTES) * 100;
-
           document.getElementById('storageUsage').textContent = this.formatBytes(storageUsed);
           document.getElementById('storageBar').style.width = `${Math.min(percentage, 100)}%`;
           document.getElementById('dataUsage').textContent = this.formatBytes(storageUsed);
           document.getElementById('dataBar').style.width = `${Math.min(percentage, 100)}%`;
         }
-
         formatBytes(bytes) {
           if (bytes === 0) return '0 Bytes';
           const units = ['Bytes', 'KB', 'MB', 'GB'];
@@ -1037,52 +1071,40 @@
           return parseFloat((bytes / Math.pow(1024, index)).toFixed(2)) + ' ' + units[index];
         }
 
-        /* ---------- DÉTECTION IP PUBLIQUE ---------- */
+        /* IP */
         async detectPublicIP() {
           try {
             const response = await fetch('https://api.ipify.org?format=json');
             const data = await response.json();
             document.getElementById('publicIp').textContent = data.ip;
-          } catch (error) {
+          } catch {
             document.getElementById('publicIp').textContent = 'N/A';
           }
         }
 
-        /* ---------- RENDU DE LA GRILLE DE SITES ---------- */
+        /* Rendu */
         render() {
           const grid = document.getElementById('sitesGrid');
           let data = [...this.sites];
+          if (this.currentFilter === 'favorites') data = data.filter(s => s.favorite);
+          else if (this.currentFilter === 'visited') data.sort((a, b) => (b.visits || 0) - (a.visits || 0));
+          else if (this.currentFilter === 'recent') data.sort((a, b) => (b.lastVisit || 0) - (a.lastVisit || 0));
 
-          // Filtrage selon le filtre actif
-          if (this.currentFilter === 'favorites') {
-            data = data.filter(site => site.favorite);
-          } else if (this.currentFilter === 'visited') {
-            data.sort((a, b) => (b.visits || 0) - (a.visits || 0));
-          } else if (this.currentFilter === 'recent') {
-            data.sort((a, b) => (b.lastVisit || 0) - (a.lastVisit || 0));
-          }
-
-          // État vide
           if (data.length === 0) {
             grid.innerHTML = `
               <div class="empty-state">
-                <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <use href="#icon-folder"/>
-                </svg>
+                <svg class="empty-icon" viewBox="0 0 24 24"><use href="#icon-folder-open"/></svg>
                 <div class="empty-title">Aucun site</div>
                 <p>Clique sur + pour ajouter un site</p>
               </div>`;
             return;
           }
 
-          // Génération des cartes
           grid.innerHTML = data.map(site => `
             <div class="site-card" onclick="app.launchSite(${site.id})">
               <div class="site-header">
                 <div class="site-icon">
-                  ${site.icon
-                    ? `<img src="${site.icon}" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='🌐'">`
-                    : '🌐'}
+                  ${site.icon ? `<img src="${site.icon}" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='🌐'">` : '🌐'}
                 </div>
                 <div class="site-actions">
                   <button class="site-action delete" onclick="event.stopPropagation();app.deleteSite(${site.id})">
@@ -1099,47 +1121,31 @@
               </div>
             </div>
           `).join('');
-
           this.updateStorageStats();
         }
-
         escapeHtml(text) {
-          const element = document.createElement('div');
-          element.textContent = text;
-          return element.innerHTML;
+          const el = document.createElement('div');
+          el.textContent = text;
+          return el.innerHTML;
         }
-
         getDomain(url) {
-          try {
-            return new URL(url).hostname.replace('www.', '');
-          } catch {
-            return url;
-          }
+          try { return new URL(url).hostname.replace('www.', ''); }
+          catch { return url; }
         }
 
-        /* ---------- AJOUT D'UN NOUVEAU SITE ---------- */
+        /* Sites */
         saveSite() {
           const urlInput = document.getElementById('siteUrl');
           const nameInput = document.getElementById('siteName');
           const emailInput = document.getElementById('siteEmail');
           const passInput = document.getElementById('sitePass');
-
           let url = urlInput.value.trim();
           const name = nameInput.value.trim();
-
-          if (!url) {
-            this.showToast('URL requise', 'error');
-            return;
-          }
-
-          // Ajout du protocole si absent
-          if (!/^https?:\/\//i.test(url)) {
-            url = 'https://' + url;
-          }
-
-          const newSite = {
+          if (!url) { this.showToast('URL requise', 'error'); return; }
+          if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+          this.sites.unshift({
             id: Date.now(),
-            url: url,
+            url,
             name: name || this.getDomain(url),
             icon: `https://www.google.com/s2/favicons?domain=${this.getDomain(url)}&sz=64`,
             email: emailInput.value.trim(),
@@ -1147,140 +1153,184 @@
             favorite: false,
             visits: 0,
             lastVisit: Date.now()
-          };
-
-          this.sites.unshift(newSite);
+          });
           localStorage.setItem('workspace_sites', JSON.stringify(this.sites));
-
-          // Réinitialisation des champs
-          urlInput.value = '';
-          nameInput.value = '';
-          emailInput.value = '';
-          passInput.value = '';
-
+          urlInput.value = nameInput.value = emailInput.value = passInput.value = '';
           this.closeModal('addModal');
           this.render();
-          this.showToast('Site ajouté avec succès', 'success');
+          this.showToast('Site ajouté', 'success');
         }
-
-        /* ---------- LANCEMENT D'UN SITE ---------- */
         launchSite(id) {
           const site = this.sites.find(s => s.id === id);
           if (!site) return;
           site.visits = (site.visits || 0) + 1;
           site.lastVisit = Date.now();
           localStorage.setItem('workspace_sites', JSON.stringify(this.sites));
-          window.open(site.url, '_blank');
-          this.render(); // Met à jour le compteur de visites
+          this.render();
+          browser.open(site.url);
         }
-
-        /* ---------- SUPPRESSION D'UN SITE ---------- */
         deleteSite(id) {
-          if (!confirm('Supprimer ce site définitivement ?')) return;
-          this.sites = this.sites.filter(site => site.id !== id);
+          if (!confirm('Supprimer ce site ?')) return;
+          this.sites = this.sites.filter(s => s.id !== id);
           localStorage.setItem('workspace_sites', JSON.stringify(this.sites));
           this.render();
           this.showToast('Site supprimé', 'success');
         }
 
-        /* ---------- FILTRES ET RECHERCHE ---------- */
+        /* Filtres */
         setFilter(filter, element) {
           this.currentFilter = filter;
-          // Mise à jour des classes actives
-          document.querySelectorAll('.chip').forEach(chip => chip.classList.remove('active'));
-          document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+          document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+          document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
           if (element) element.classList.add('active');
           this.render();
         }
-
         searchSites(query) {
           if (!query.trim()) {
-            // Si la recherche est vide, on recharge les sites complets
             this.sites = JSON.parse(localStorage.getItem('workspace_sites')) || [];
           } else {
-            const lowerQuery = query.toLowerCase();
-            const allSites = JSON.parse(localStorage.getItem('workspace_sites')) || [];
-            this.sites = allSites.filter(site =>
-              site.name.toLowerCase().includes(lowerQuery) ||
-              site.url.toLowerCase().includes(lowerQuery)
+            const lower = query.toLowerCase();
+            this.sites = (JSON.parse(localStorage.getItem('workspace_sites')) || []).filter(s =>
+              s.name.toLowerCase().includes(lower) || s.url.toLowerCase().includes(lower)
             );
           }
           this.render();
         }
 
-        /* ---------- MODALES ---------- */
-        openAddModal() {
-          document.getElementById('addModal').classList.add('active');
-        }
+        /* Modales */
+        openAddModal() { document.getElementById('addModal').classList.add('active'); }
+        closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        openSettingsPanel() { document.getElementById('settingsPanel').classList.add('open'); }
+        closeSettingsPanel() { document.getElementById('settingsPanel').classList.remove('open'); }
 
-        closeModal(modalId) {
-          document.getElementById(modalId).classList.remove('active');
-        }
-
-        /* ---------- PANNEAU PARAMÈTRES ---------- */
-        openSettingsPanel() {
-          document.getElementById('settingsPanel').classList.add('open');
-        }
-
-        closeSettingsPanel() {
-          document.getElementById('settingsPanel').classList.remove('open');
-        }
-
-        /* ---------- ACTIONS DE STOCKAGE ---------- */
+        /* Paramètres */
         clearWorkspaceFolder() {
-          if (!confirm('Vider complètement le dossier Workspace Pro ? Cette action est irréversible.')) return;
+          if (!confirm('Vider le dossier Workspace Pro ?')) return;
           localStorage.removeItem('workspace_sites');
           localStorage.removeItem('workspace_folder_created');
           localStorage.removeItem('workspace_app_folder');
           this.sites = [];
           this.render();
-          this.showToast('Dossier vidé avec succès', 'success');
+          this.showToast('Dossier vidé', 'success');
         }
-
         clearAllData() {
-          if (!confirm('Effacer TOUTES les données ? Cette action est définitive.')) return;
+          if (!confirm('Tout effacer définitivement ?')) return;
           localStorage.removeItem('workspace_sites');
           localStorage.removeItem('workspace_folder_created');
           localStorage.removeItem('workspace_app_folder');
           this.sites = [];
           this.render();
-          this.showToast('Toutes les données ont été effacées', 'warning');
+          this.showToast('Données effacées', 'warning');
         }
-
         exportData() {
-          if (this.sites.length === 0) {
-            this.showToast('Aucune donnée à exporter', 'warning');
-            return;
-          }
+          if (this.sites.length === 0) { this.showToast('Aucune donnée', 'warning'); return; }
           const blob = new Blob([JSON.stringify(this.sites, null, 2)], { type: 'application/json' });
-          const anchor = document.createElement('a');
-          anchor.href = URL.createObjectURL(blob);
-          anchor.download = `workspace-backup-${Date.now()}.json`;
-          anchor.click();
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `workspace-backup-${Date.now()}.json`;
+          a.click();
           this.showToast('Export réussi', 'success');
         }
 
-        /* ---------- NOTIFICATIONS TOAST ---------- */
-        showToast(message, type = 'success') {
+        /* Toast */
+        showToast(msg, type = 'success') {
           const toast = document.getElementById('toast');
           toast.className = `toast ${type} show`;
-          toast.textContent = message;
-          clearTimeout(this.toastTimeout);
-          this.toastTimeout = setTimeout(() => {
-            toast.classList.remove('show');
-          }, 3000);
+          toast.textContent = msg;
+          clearTimeout(this._toastTimer);
+          this._toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        /* ---------- INSTALLATION PWA ---------- */
+        /* PWA */
         setupPWA() {
-          window.addEventListener('beforeinstallprompt', (event) => {
-            event.preventDefault();
-            this.deferredPrompt = event;
+          window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            this.deferredPrompt = e;
           });
         }
       }
 
-      // Instance globale accessible
+      // ----- CLASSE NAVIGATEUR -----
+      class Browser {
+        constructor() {
+          this.panel = document.getElementById('browserPanel');
+          this.iframe = document.getElementById('browserIframe');
+          this.urlInput = document.getElementById('browserUrlInput');
+          this.errorDiv = document.getElementById('browserError');
+          this.currentUrl = '';
+          this.history = [];
+          this.historyIndex = -1;
+          this._setupErrorDetection();
+        }
+        _setupErrorDetection() {
+          this.iframe.addEventListener('load', () => {
+            this.errorDiv.style.display = 'none';
+            // Vérification après un court délai
+            setTimeout(() => {
+              try {
+                const doc = this.iframe.contentDocument;
+                if (!doc || doc.location.href === 'about:blank') {
+                  this.errorDiv.style.display = 'block';
+                }
+              } catch (e) {
+                this.errorDiv.style.display = 'block';
+              }
+            }, 1000);
+          });
+        }
+        open(url) {
+          this.panel.classList.add('active');
+          this.navigateToUrl(url);
+        }
+        navigateToUrl(url) {
+          if (!url) return;
+          if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+          this.currentUrl = url;
+          this.urlInput.value = url;
+          this.errorDiv.style.display = 'none';
+          this.iframe.src = url;
+          // Historique
+          if (this.historyIndex < this.history.length - 1) {
+            this.history = this.history.slice(0, this.historyIndex + 1);
+          }
+          this.history.push(url);
+          this.historyIndex = this.history.length - 1;
+        }
+        goBack() {
+          if (this.historyIndex > 0) {
+            this.historyIndex--;
+            this._loadSilent(this.history[this.historyIndex]);
+          }
+        }
+        goForward() {
+          if (this.historyIndex < this.history.length - 1) {
+            this.historyIndex++;
+            this._loadSilent(this.history[this.historyIndex]);
+          }
+        }
+        _loadSilent(url) {
+          this.currentUrl = url;
+          this.urlInput.value = url;
+          this.errorDiv.style.display = 'none';
+          this.iframe.src = url;
+        }
+        refresh() {
+          this._loadSilent(this.currentUrl);
+        }
+        openExternally() {
+          if (this.currentUrl) window.open(this.currentUrl, '_blank');
+        }
+        close() {
+          this.panel.classList.remove('active');
+          this.iframe.src = 'about:blank';
+          this.currentUrl = '';
+          this.urlInput.value = '';
+          this.errorDiv.style.display = 'none';
+        }
+      }
+
+      // Initialisation
+      window.browser = new Browser();
       window.app = new WorkspaceProApp();
     })();
   </script>
