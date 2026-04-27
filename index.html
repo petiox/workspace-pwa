@@ -2,78 +2,104 @@
 <html lang="fr" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#0f172a">
-  <meta name="description" content="Workspace Pro - Espace de travail sécurisé">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Workspace Pro">
   <title>Workspace Pro</title>
-  
-  <!-- PWA Manifest Inline -->
-  <link rel="manifest" href='data:application/manifest+json;base64,eyJuYW1lIjoiV29ya3NwYWNlIFBybyIsInNob3J0X25hbWUiOiJXb3Jrc3BhY2UiLCJzdGFydF91cmwiOiIvIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBmMTcyYSIsInRoZW1lX2NvbG9yIjoiIzBmMTcyYSJ9'>
-  
+
+  <!-- Icône de l'application -->
+  <link rel="apple-touch-icon" href="https://i.ibb.co/4RSj5MKR/Screenshot-20260424-065250-Whats-App-Business.jpg">
+  <link rel="manifest" id="manifestLink">
+
+  <!-- Styles propres et organisés -->
   <style>
+    /* ----- VARIABLES ----- */
     :root {
       --primary: #3b82f6;
-      --primary-dark: #1d4ed8;
       --secondary: #8b5cf6;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
       --bg: #0f172a;
       --surface: #1e293b;
-      --surface-elevated: #334155;
       --text: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --border: rgba(148, 163, 184, 0.1);
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      --radius: 16px;
-      --radius-sm: 12px;
+      --text-muted: #94a3b8;
+      --border: rgba(148, 163, 184, 0.15);
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      --radius: 12px;
     }
-    
+
     [data-theme="light"] {
       --bg: #f8fafc;
       --surface: #ffffff;
-      --surface-elevated: #f1f5f9;
       --text: #0f172a;
-      --text-secondary: #64748b;
-      --border: rgba(148, 163, 184, 0.2);
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --text-muted: #64748b;
+      --border: rgba(148, 163, 184, 0.25);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
-    
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', system-ui, sans-serif; }
-    
+
+    /* ----- RESET & BASE ----- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      padding-bottom: 100px;
-      transition: background 0.3s;
-    }    
-    /* HEADER */
+      padding-bottom: 90px;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ----- ICÔNES SVG ----- */
+    .icon-sprite {
+      display: none;
+    }
+
+    .icon {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      vertical-align: middle;
+    }
+
+    .icon-sm { width: 16px; height: 16px; }
+    .icon-md { width: 20px; height: 20px; }
+    .icon-lg { width: 28px; height: 28px; }
+    .icon-xl { width: 32px; height: 32px; }
+
+    /* ----- HEADER ----- */
     .header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      padding: 1.5rem 1rem 2.5rem;
-      border-radius: 0 0 24px 0;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 24px 16px 20px;
       position: relative;
       overflow: hidden;
     }
-    
+
     .header::before {
       content: '';
       position: absolute;
-      top: -50%;
+      top: -40%;
       right: -10%;
-      width: 200px;
-      height: 200px;
-      background: rgba(255,255,255,0.1);
+      width: 160px;
+      height: 160px;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 50%;
-      animation: float 6s ease-in-out infinite;
     }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-    
+
     .header-content {
       display: flex;
       justify-content: space-between;
@@ -81,661 +107,766 @@
       position: relative;
       z-index: 1;
     }
-    
+
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 12px;
     }
-    
+
     .brand-icon {
       width: 48px;
       height: 48px;
-      background: rgba(255,255,255,0.2);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 12px;
       display: flex;
       align-items: center;
-      justify-content: center;      border: 2px solid rgba(255,255,255,0.3);
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
     }
-    
-    .brand h1 {
+
+    .brand-text h1 {
       font-size: 1.4rem;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 0.2rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0;
     }
-    
-    .brand p {
+
+    .brand-text p {
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
     }
-    
+
     .header-actions {
       display: flex;
-      gap: 0.5rem;
+      gap: 8px;
     }
-    
+
     .icon-btn {
-      width: 44px;
-      height: 44px;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(10px);
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.15);
       border: none;
       border-radius: 50%;
-      color: white;
+      color: #fff;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s;
     }
-    
-    .icon-btn:active { transform: scale(0.9); }
-    .icon-btn:hover { background: rgba(255,255,255,0.25); }
-    
-    /* NETWORK CARDS */
+
+    .icon-btn:active {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ----- CARTES RÉSEAU ----- */
     .network-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      padding: 0 1rem;
-      margin-top: -1.5rem;
-      margin-bottom: 1rem;
+      gap: 10px;
+      padding: 0 16px;
+      margin: -18px 0 16px;
+      position: relative;
+      z-index: 10;
     }
-    
+
     .network-card {
-      background: var(--surface);      padding: 1rem;
-      border-radius: var(--radius-sm);
+      background: var(--surface);
+      padding: 14px 8px;
+      border-radius: var(--radius);
       text-align: center;
       box-shadow: var(--shadow);
+      border: 1px solid var(--border);
     }
-    
-    .network-icon {
-      width: 32px;
-      height: 32px;
-      margin: 0 auto 0.5rem;
+
+    .network-card .icon {
       color: var(--primary);
+      margin: 0 auto 6px;
+      display: block;
     }
-    
+
     .network-label {
       font-size: 0.75rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.25rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
     }
-    
+
     .network-value {
       font-size: 0.9rem;
       font-weight: 700;
     }
-    
-    /* SEARCH */
-    .search-box {
-      padding: 0 1rem 1rem;
+
+    /* ----- CARTES STOCKAGE ----- */
+    .storage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 0 16px;
+      margin-bottom: 16px;
     }
-    
-    .search-input-wrapper {
+
+    .storage-card {
+      background: var(--surface);
+      padding: 12px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .storage-header {
       display: flex;
       align-items: center;
-      gap: 0.8rem;
-      background: var(--surface);
-      padding: 0.8rem 1rem;
-      border-radius: var(--radius-sm);
-      box-shadow: var(--shadow);
+      gap: 8px;
+      margin-bottom: 8px;
     }
-    
-    .search-input-wrapper input {
+
+    .storage-header .icon {
+      color: var(--primary);
+    }
+
+    .storage-title {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .storage-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .storage-bar {
+      height: 4px;
+      background: var(--bg);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+
+    .storage-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+
+    /* ----- RECHERCHE ----- */
+    .search-box {
+      padding: 0 16px 12px;
+    }
+
+    .search-input {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0 14px;
+      height: 48px;
+    }
+
+    .search-input .icon {
+      color: var(--text-muted);
+    }
+
+    .search-input input {
       flex: 1;
-      background: none;
       border: none;
+      background: none;
       color: var(--text);
       font-size: 1rem;
       outline: none;
     }
-    
-    /* FILTERS */
-    .filters {      display: flex;
-      gap: 0.5rem;
-      padding: 0 1rem 1rem;
+
+    .search-input input::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* ----- FILTRES ----- */
+    .filters {
+      display: flex;
+      gap: 8px;
+      padding: 0 16px 16px;
       overflow-x: auto;
       scrollbar-width: none;
     }
-    
-    .filters::-webkit-scrollbar { display: none; }
-    
-    .filter-chip {
-      padding: 0.7rem 1.2rem;
+
+    .filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chip {
+      padding: 8px 16px;
       background: var(--surface);
       border: 2px solid var(--border);
-      border-radius: 24px;
+      border-radius: 20px;
       font-size: 0.9rem;
       font-weight: 600;
       white-space: nowrap;
       cursor: pointer;
-      transition: all 0.3s;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      color: var(--text-muted);
+      transition: all 0.2s;
+      user-select: none;
     }
-    
-    .filter-chip.active {
+
+    .chip.active {
       background: var(--primary);
-      color: white;
+      color: #fff;
       border-color: var(--primary);
-      transform: translateY(-2px);
     }
-    
-    /* SITES GRID */
+
+    /* ----- GRILLE DES SITES ----- */
     .sites-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-      gap: 1rem;
-      padding: 0 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+      padding: 0 16px 20px;
     }
-    
+
     .site-card {
       background: var(--surface);
       border-radius: var(--radius);
-      padding: 1.2rem;
+      padding: 14px;
+      border: 1px solid var(--border);
       cursor: pointer;
-      transition: all 0.3s;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .site-card:active {
+      transform: scale(0.97);
+    }
+
+    .site-card:hover {
       box-shadow: var(--shadow);
     }
-    
-    .site-card:hover {      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-    }
-    
-    .site-card:active { transform: scale(0.98); }
-    
+
     .site-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
+      margin-bottom: 10px;
     }
-    
+
     .site-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--surface-elevated);
-      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      background: var(--bg);
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
+      font-size: 1.8rem;
+      border: 1px solid var(--border);
       overflow: hidden;
-      border: 2px solid var(--border);
     }
-    
+
     .site-icon img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    
+
     .site-actions {
       display: flex;
-      gap: 0.4rem;
+      gap: 4px;
     }
-    
-    .site-action-btn {
-      width: 32px;
-      height: 32px;
-      background: var(--surface-elevated);
+
+    .site-action {
+      width: 28px;
+      height: 28px;
+      background: var(--bg);
       border: none;
-      border-radius: 8px;
-      color: var(--text-secondary);
+      border-radius: 6px;
+      color: var(--text-muted);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
-    }    
-    .site-action-btn:hover {
-      background: var(--primary);
-      color: white;
-      transform: scale(1.1);
     }
-    
-    .site-action-btn.delete:hover {
+
+    .site-action.delete:hover {
       background: var(--danger);
+      color: #fff;
     }
-    
+
     .site-name {
       font-weight: 700;
-      font-size: 1rem;
-      margin-bottom: 0.3rem;
+      margin-bottom: 3px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
+
     .site-url {
       font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
+
     .site-badges {
       display: flex;
-      gap: 0.4rem;
+      gap: 5px;
       flex-wrap: wrap;
     }
-    
+
     .badge {
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
+      padding: 3px 7px;
+      border-radius: 5px;
+      font-size: 0.7rem;
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 0.3rem;
+      gap: 3px;
     }
-    
-    .badge-fav { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
-    .badge-secure { background: rgba(16, 185, 129, 0.15); color: var(--success); }
-    .badge-visits { background: var(--surface-elevated); color: var(--text-secondary); }
-    
-    /* FAB */    .fab {
-      position: fixed;
-      bottom: 100px;
-      right: 24px;
-      width: 64px;
-      height: 64px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border: none;
-      border-radius: 50%;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-      z-index: 100;
+
+    .badge-fav {
+      background: rgba(251, 191, 36, 0.15);
+      color: #fbbf24;
     }
-    
-    .fab:hover {
-      transform: scale(1.1) rotate(90deg);
+
+    .badge-secure {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
     }
-    
-    .fab:active { transform: scale(0.95); }
-    
-    /* MODAL */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(5px);
-      z-index: 200;
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
+
+    .badge-visits {
+      background: var(--bg);
+      color: var(--text-muted);
     }
-    
-    .modal-overlay.active { display: flex; }
-    
-    .modal {
-      background: var(--surface);
-      width: 100%;
-      max-height: 85vh;
-      border-radius: 24px 24px 0 0;
-      overflow: hidden;
-      animation: slideUp 0.3s;
-    }    
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+      grid-column: 1 / -1;
     }
-    
-    .modal-header {
-      padding: 1.5rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+
+    .empty-icon {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 16px;
+      opacity: 0.3;
     }
-    
-    .modal-title {
-      font-size: 1.3rem;
+
+    .empty-title {
+      font-size: 1.1rem;
       font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      margin-bottom: 8px;
+      color: var(--text);
     }
-    
-    .modal-close {
-      width: 40px;
-      height: 40px;
-      background: var(--surface-elevated);
+
+    /* ----- BOUTON FLOTTANT ----- */
+    .fab {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       border: none;
       border-radius: 50%;
-      color: var(--text);
+      color: #fff;
+      font-size: 1.8rem;
       cursor: pointer;
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+      z-index: 100;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
     }
-    
-    .modal-close:hover {
-      background: var(--danger);
-      color: white;
-      transform: rotate(90deg);
-    }
-    
-    .modal-content {
-      padding: 1.5rem;
-      overflow-y: auto;
-      max-height: calc(85vh - 80px);
-    }
-    
-    /* FORM */
-    .form-group {      margin-bottom: 1.2rem;
-    }
-    
-    .form-label {
-      display: block;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    
-    .form-input {
-      width: 100%;
-      padding: 1rem;
-      background: var(--surface-elevated);
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      color: var(--text);
-      font-size: 1rem;
-      transition: all 0.3s;
-    }
-    
-    .form-input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-    
-    .checkbox-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      padding: 1rem;
-      background: var(--surface-elevated);
-      border-radius: 12px;
-      cursor: pointer;
-    }
-    
-    .checkbox-wrapper input {
-      width: 22px;
-      height: 22px;
-      accent-color: var(--primary);
-    }
-    
-    .btn-primary {
-      width: 100%;
-      padding: 1.1rem;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 1rem;      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    
-    .btn-secondary {
-      width: 100%;
-      padding: 1rem;
-      background: var(--surface-elevated);
-      color: var(--text);
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 0.8rem;
-    }
-    
-    /* BOTTOM NAV */
+
+    /* ----- NAVIGATION INFÉRIEURE ----- */
     .bottom-nav {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       background: var(--surface);
-      padding: 0.8rem 1rem calc(0.8rem + env(safe-area-inset-bottom));
+      padding: 8px 16px calc(8px + env(safe-area-inset-bottom, 0px));
       display: flex;
       justify-content: space-around;
       align-items: center;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
-      z-index: 50;
       border-top: 1px solid var(--border);
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 50;
     }
-    
+
     .nav-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.3rem;
-      padding: 0.5rem 1rem;
+      gap: 3px;
+      padding: 4px 12px;
       background: none;
       border: none;
-      color: var(--text-secondary);
+      color: var(--text-muted);
       cursor: pointer;
-      border-radius: 12px;
-      transition: all 0.2s;    }
-    
+      border-radius: 8px;
+      transition: all 0.2s;
+      font-size: inherit;
+    }
+
     .nav-item.active {
       color: var(--primary);
       background: rgba(59, 130, 246, 0.1);
     }
-    
-    .nav-item:active { transform: scale(0.9); }
-    
-    /* EMPTY STATE */
-    .empty-state {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: var(--text-secondary);
-      grid-column: 1 / -1;
+
+    .nav-item .icon {
+      width: 22px;
+      height: 22px;
     }
-    
-    .empty-icon {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 1rem;
-      opacity: 0.5;
+
+    .nav-label {
+      font-size: 0.7rem;
+      font-weight: 600;
     }
-    
-    /* TOAST */
+
+    /* ----- MODALE ----- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 200;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--surface);
+      width: 100%;
+      max-height: 85vh;
+      border-radius: 20px 20px 0 0;
+      overflow: hidden;
+      animation: slideUp 0.3s ease;
+      border: 1px solid var(--border);
+      border-bottom: none;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      background: var(--bg);
+      border: none;
+      border-radius: 50%;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      padding: 20px;
+      overflow-y: auto;
+      max-height: calc(85vh - 70px);
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 13px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .btn-secondary {
+      width: 100%;
+      padding: 12px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    /* ----- PANNEAU PARAMÈTRES ----- */
+    .settings-panel {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background: var(--surface);
+      z-index: 150;
+      transition: left 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--border);
+    }
+
+    .settings-panel.open {
+      left: 0;
+    }
+
+    .settings-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .settings-content {
+      padding: 16px 20px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .setting-item {
+      padding: 14px;
+      background: var(--bg);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+    }
+
+    .setting-item .icon {
+      color: var(--primary);
+    }
+
+    /* ----- TOAST ----- */
     .toast {
       position: fixed;
       bottom: 100px;
       left: 50%;
-      transform: translateX(-50%) translateY(100px);
+      transform: translateX(-50%) translateY(60px);
       background: var(--surface);
-      padding: 1rem 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
       z-index: 300;
       opacity: 0;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      border-left: 4px solid var(--success);
+      pointer-events: none;
     }
-    
+
     .toast.show {
       transform: translateX(-50%) translateY(0);
       opacity: 1;
     }
-    
-    .toast.success { border-left: 4px solid var(--success); }
-    .toast.error { border-left: 4px solid var(--danger); }
-  </style></head>
+
+    .toast.error {
+      border-left-color: var(--danger);
+    }
+
+    .toast.warning {
+      border-left-color: var(--warning);
+    }
+  </style>
+</head>
 <body>
 
-  <!-- HEADER -->
+  <!-- Collection d'icônes SVG (symboles) -->
+  <svg class="icon-sprite">
+    <symbol id="icon-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
+    <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+    <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+    <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="icon-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></symbol>
+    <symbol id="icon-pie-chart" viewBox="0 0 24 24"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></symbol>
+    <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+    <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="icon-chevron-left" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></symbol>
+    <symbol id="icon-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+    <symbol id="icon-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></symbol>
+    <symbol id="icon-folder-minus" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="8" y1="14" x2="16" y2="14"/></symbol>
+  </svg>
+
+  <!-- EN-TÊTE PRINCIPAL -->
   <header class="header">
     <div class="header-content">
       <div class="brand">
         <div class="brand-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-            <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12" y2="21"></line>
-          </svg>
+          <svg class="icon icon-lg"><use href="#icon-monitor"/></svg>
         </div>
-        <div>
+        <div class="brand-text">
           <h1>Workspace Pro</h1>
           <p>Espace sécurisé</p>
         </div>
       </div>
       <div class="header-actions">
-        <button class="icon-btn" onclick="app.openSettings()" title="Paramètres">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"></circle>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-          </svg>
+        <button class="icon-btn" onclick="app.openSettingsPanel()">
+          <svg class="icon icon-md"><use href="#icon-settings"/></svg>
         </button>
-        <button class="icon-btn" onclick="app.toggleTheme()" title="Thème">
-          <svg id="themeIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
+        <button class="icon-btn" onclick="app.toggleTheme()">
+          <svg class="icon icon-md" id="themeIcon"><use href="#icon-moon"/></svg>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- NETWORK INFO -->
+  <!-- CARTES RÉSEAU -->
   <div class="network-grid">
     <div class="network-card">
-      <div class="network-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="2" y1="12" x2="22" y2="12"></line>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-        </svg>
-      </div>
+      <svg class="icon icon-lg"><use href="#icon-globe"/></svg>
       <div class="network-label">IP Publique</div>
       <div class="network-value" id="publicIp">...</div>
     </div>
     <div class="network-card">
-      <div class="network-icon">        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-        </svg>
-      </div>
+      <svg class="icon icon-lg"><use href="#icon-shield"/></svg>
       <div class="network-label">VPN</div>
       <div class="network-value" id="vpnStatus">Inactif</div>
     </div>
     <div class="network-card">
-      <div class="network-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-        </svg>
-      </div>
+      <svg class="icon icon-lg"><use href="#icon-database"/></svg>
       <div class="network-label">DNS</div>
       <div class="network-value">Auto</div>
     </div>
   </div>
 
-  <!-- SEARCH -->
+  <!-- CARTES STOCKAGE & DONNÉES -->
+  <div class="storage-grid">
+    <div class="storage-card">
+      <div class="storage-header">
+        <svg class="icon icon-md"><use href="#icon-pie-chart"/></svg>
+        <span class="storage-title">Données utilisées</span>
+      </div>
+      <div class="storage-value" id="dataUsage">0 KB</div>
+      <div class="storage-bar"><div class="storage-progress" id="dataBar" style="width: 0%"></div></div>
+    </div>
+    <div class="storage-card">
+      <div class="storage-header">
+        <svg class="icon icon-md"><use href="#icon-folder"/></svg>
+        <span class="storage-title">Stockage local</span>
+      </div>
+      <div class="storage-value" id="storageUsage">0 KB</div>
+      <div class="storage-bar"><div class="storage-progress" id="storageBar" style="width: 0%"></div></div>
+    </div>
+  </div>
+
+  <!-- BARRE DE RECHERCHE -->
   <div class="search-box">
-    <div class="search-input-wrapper">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
+    <div class="search-input">
+      <svg class="icon icon-md"><use href="#icon-search"/></svg>
       <input type="text" placeholder="Rechercher un site..." id="searchInput" oninput="app.searchSites(this.value)">
     </div>
   </div>
 
-  <!-- FILTERS -->
+  <!-- FILTRES -->
   <div class="filters">
-    <div class="filter-chip active" onclick="app.setFilter('all', this)">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="3" width="7" height="7"></rect>
-        <rect x="14" y="3" width="7" height="7"></rect>
-        <rect x="14" y="14" width="7" height="7"></rect>
-        <rect x="3" y="14" width="7" height="7"></rect>
-      </svg>
-      Tous
-    </div>
-    <div class="filter-chip" onclick="app.setFilter('favorites', this)">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-      </svg>
-      Favoris
-    </div>
-    <div class="filter-chip" onclick="app.setFilter('visited', this)">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-        <polyline points="17 6 23 6 23 12"></polyline>
-      </svg>
-      Top
-    </div>
-    <div class="filter-chip" onclick="app.setFilter('recent', this)">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <polyline points="12 6 12 12 16 14"></polyline>
-      </svg>
-      Récents
-    </div>
-    <div class="filter-chip" onclick="app.setFilter('secure', this)">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-      </svg>
-      Sécurisés
-    </div>
+    <div class="chip active" onclick="app.setFilter('all', this)">Tous</div>
+    <div class="chip" onclick="app.setFilter('favorites', this)">Favoris</div>
+    <div class="chip" onclick="app.setFilter('visited', this)">Top</div>
+    <div class="chip" onclick="app.setFilter('recent', this)">Récents</div>
   </div>
 
-  <!-- SITES GRID -->
+  <!-- GRILLE DES SITES -->
   <div class="sites-grid" id="sitesGrid"></div>
 
-  <!-- FAB -->
+  <!-- BOUTON FLOTTANT D'AJOUT -->
   <button class="fab" onclick="app.openAddModal()">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="12" y1="5" x2="12" y2="19"></line>
-      <line x1="5" y1="12" x2="19" y2="12"></line>
-    </svg>
+    <svg class="icon icon-xl"><use href="#icon-plus"/></svg>
   </button>
 
-  <!-- ADD MODAL -->
+  <!-- NAVIGATION INFÉRIEURE -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" onclick="app.setFilter('all', this)">
+      <svg class="icon"><use href="#icon-grid"/></svg>
+      <span class="nav-label">Accueil</span>
+    </button>
+    <button class="nav-item" onclick="app.openAddModal()">
+      <svg class="icon"><use href="#icon-plus"/></svg>
+      <span class="nav-label">Ajouter</span>
+    </button>
+    <button class="nav-item" onclick="app.openSettingsPanel()">
+      <svg class="icon"><use href="#icon-settings"/></svg>
+      <span class="nav-label">Paramètres</span>
+    </button>
+  </nav>
+
+  <!-- MODALE D'AJOUT DE SITE -->
   <div class="modal-overlay" id="addModal">
     <div class="modal">
       <div class="modal-header">
-        <div class="modal-title">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
-          <span id="modalTitle">Nouveau Site</span>
-        </div>
+        <div class="modal-title">Nouveau Site</div>
         <button class="modal-close" onclick="app.closeModal('addModal')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
+          <svg class="icon icon-md"><use href="#icon-x"/></svg>
         </button>
-      </div>      <div class="modal-content">
+      </div>
+      <div class="modal-content">
         <div class="form-group">
-          <label class="form-label">URL du site</label>
+          <label class="form-label">URL</label>
           <input type="text" class="form-input" id="siteUrl" placeholder="https://example.com">
         </div>
         <div class="form-group">
@@ -743,359 +874,415 @@
           <input type="text" class="form-input" id="siteName" placeholder="Mon Site">
         </div>
         <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-input" id="siteEmail" placeholder="user@example.com">
+          <label class="form-label">Email / Login</label>
+          <input type="email" class="form-input" id="siteEmail">
         </div>
         <div class="form-group">
           <label class="form-label">Mot de passe</label>
-          <input type="password" class="form-input" id="sitePass" placeholder="••••••••">
+          <input type="password" class="form-input" id="sitePass">
         </div>
-        <label class="checkbox-wrapper">
-          <input type="checkbox" id="siteFav">
-          <span><svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="2" style="vertical-align: middle; margin-right: 5px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Favori</span>
-        </label>
-        <button class="btn-primary" onclick="app.saveSite()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          Enregistrer
-        </button>
+        <button class="btn-primary" onclick="app.saveSite()">Enregistrer</button>
         <button class="btn-secondary" onclick="app.closeModal('addModal')">Annuler</button>
       </div>
     </div>
   </div>
 
-  <!-- BOTTOM NAV -->
-  <nav class="bottom-nav">
-    <button class="nav-item active" onclick="app.setFilter('all')">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="3" width="7" height="7"></rect>
-        <rect x="14" y="3" width="7" height="7"></rect>
-        <rect x="14" y="14" width="7" height="7"></rect>
-        <rect x="3" y="14" width="7" height="7"></rect>
-      </svg>
-      <span>Accueil</span>
-    </button>
-    <button class="nav-item" onclick="app.openAddModal()">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <line x1="12" y1="8" x2="12" y2="16"></line>
-        <line x1="8" y1="12" x2="16" y2="12"></line>
-      </svg>
-      <span>Ajouter</span>    </button>
-    <button class="nav-item" onclick="app.openSettings()">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="3"></circle>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-      </svg>
-      <span>Paramètres</span>
-    </button>
-  </nav>
-
-  <!-- TOAST -->
-  <div class="toast" id="toast">
-    <span id="toastMessage"></span>
+  <!-- PANNEAU DES PARAMÈTRES -->
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-header">
+      <button class="icon-btn" style="background:var(--bg);color:var(--text)" onclick="app.closeSettingsPanel()">
+        <svg class="icon icon-md"><use href="#icon-chevron-left"/></svg>
+      </button>
+      <span style="font-weight:700;font-size:1.2rem;">Paramètres</span>
+    </div>
+    <div class="settings-content">
+      <div class="setting-item" onclick="app.toggleTheme()">
+        <svg class="icon icon-md"><use href="#icon-moon"/></svg>
+        <span>Changer le thème</span>
+      </div>
+      <div class="setting-item" onclick="app.clearWorkspaceFolder()">
+        <svg class="icon icon-md"><use href="#icon-folder-minus"/></svg>
+        <span>Vider le dossier Workspace</span>
+      </div>
+      <div class="setting-item" onclick="app.exportData()">
+        <svg class="icon icon-md"><use href="#icon-download"/></svg>
+        <span>Exporter les données</span>
+      </div>
+      <div class="setting-item" onclick="app.clearAllData()" style="color:var(--danger)">
+        <svg class="icon icon-md" style="color:var(--danger)"><use href="#icon-trash"/></svg>
+        <span style="color:var(--danger)">Tout effacer</span>
+      </div>
+    </div>
   </div>
 
+  <!-- TOAST DE NOTIFICATION -->
+  <div class="toast" id="toast"></div>
+
   <script>
-    class WorkspaceApp {
-      constructor() {
-        this.sites = JSON.parse(localStorage.getItem('ws_sites')) || [];
-        this.currentFilter = 'all';
-        this.editingId = null;
-        this.init();
-      }
-      
-      init() {
-        this.loadTheme();
-        this.detectIP();
-        this.render();
-      }
-      
-      loadTheme() {
-        const theme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', theme);
-        this.updateThemeIcon(theme);
-      }
-      
-      toggleTheme() {
-        const html = document.documentElement;
-        const current = html.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-        this.updateThemeIcon(next);
-      }
-      
-      updateThemeIcon(theme) {
-        const icon = document.getElementById('themeIcon');
-        if (theme === 'dark') {
-          icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
-        } else {          icon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
-        }
-      }
-      
-      async detectIP() {
-        try {
-          const response = await fetch('https://api.ipify.org?format=json');
-          const data = await response.json();
-          document.getElementById('publicIp').textContent = data.ip;
-        } catch (e) {
-          document.getElementById('publicIp').textContent = 'N/A';
-        }
-      }
-      
-      render() {
-        const grid = document.getElementById('sitesGrid');
-        let filtered = [...this.sites];
-        
-        if (this.currentFilter === 'favorites') filtered = filtered.filter(s => s.fav);
-        if (this.currentFilter === 'secure') filtered = filtered.filter(s => s.email || s.pass);
-        
-        if (this.currentFilter === 'visited') {
-          filtered.sort((a, b) => (b.visits || 0) - (a.visits || 0));
-        } else if (this.currentFilter === 'recent') {
-          filtered.sort((a, b) => (b.lastVisit || 0) - (a.lastVisit || 0));
-        } else {
-          filtered.sort((a, b) => b.id - a.id);
-        }
-        
-        if (filtered.length === 0) {
-          grid.innerHTML = `
-            <div class="empty-state">
-              <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-              </svg>
-              <p>Aucun site enregistré</p>
-            </div>
-          `;
-          return;
-        }
-        
-        grid.innerHTML = filtered.map(site => {
-          const domain = this.getDomain(site.url);
-          const hasCreds = site.email || site.pass;
+    (function() {
+      // ----- CONSTANTES -----
+      const APP_LOGO = 'https://i.ibb.co/4RSj5MKR/Screenshot-20260424-065250-Whats-App-Business.jpg';
+      const APP_FOLDER = 'WorkspacePro';
+      const MAX_STORAGE_BYTES = 5 * 1024 * 1024; // 5 Mo (limite typique de localStorage)
+
+      // ----- MANIFESTE PWA DYNAMIQUE -----
+      const manifestData = {
+        name: "Workspace Pro",
+        short_name: "Workspace",
+        description: "Espace de travail sécurisé",
+        start_url: "./index.html",
+        display: "standalone",
+        background_color: "#0f172a",
+        theme_color: "#0f172a",
+        orientation: "portrait-primary",
+        icons: [
+          { src: APP_LOGO, sizes: "192x192", type: "image/jpeg", purpose: "any maskable" },
+          { src: APP_LOGO, sizes: "512x512", type: "image/jpeg", purpose: "any" }
+        ],
+        categories: ["productivity", "business", "utilities"]
+      };
+
+      const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/manifest+json' });
+      document.getElementById('manifestLink').href = URL.createObjectURL(manifestBlob);
+
+      // ----- SERVICE WORKER (simplifié) -----
+      if ('serviceWorker' in navigator) {
+        const serviceWorkerCode = `
+          const CACHE_NAME = 'workspace-pro-v1';
+          const ASSETS = ['.', '/index.html', '${APP_LOGO}'];
           
-          return `
+          self.addEventListener('install', (event) => {
+            event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
+            self.skipWaiting();
+          });
+          
+          self.addEventListener('activate', (event) => {
+            event.waitUntil(clients.claim());
+          });
+          
+          self.addEventListener('fetch', (event) => {
+            event.respondWith(
+              caches.match(event.request).then((response) => response || fetch(event.request).catch(() => new Response('Offline')))
+            );
+          });
+        `;
+        const swBlob = new Blob([serviceWorkerCode], { type: 'application/javascript' });
+        navigator.serviceWorker.register(URL.createObjectURL(swBlob));
+      }
+
+      // ----- CLASSE PRINCIPALE DE L'APPLICATION -----
+      class WorkspaceProApp {
+        constructor() {
+          // Chargement des sites depuis le stockage local
+          this.sites = JSON.parse(localStorage.getItem('workspace_sites')) || [];
+          this.currentFilter = 'all';
+          this.deferredPrompt = null;
+
+          // Initialisation
+          this.initializeTheme();
+          this.detectPublicIP();
+          this.render();
+          this.setupPWA();
+          this.createAppFolderMarker();
+          this.updateStorageStats();
+        }
+
+        /* ---------- GESTION DU THÈME ---------- */
+        initializeTheme() {
+          const savedTheme = localStorage.getItem('workspace_theme') || 'dark';
+          this.applyTheme(savedTheme);
+        }
+
+        applyTheme(theme) {
+          document.documentElement.setAttribute('data-theme', theme);
+          const themeIcon = document.getElementById('themeIcon');
+          if (themeIcon) {
+            // Icône lune pour thème sombre, soleil pour thème clair
+            themeIcon.innerHTML = theme === 'dark'
+              ? '<use href="#icon-moon"/>'
+              : '<use href="#icon-sun"/>';
+          }
+        }
+
+        toggleTheme() {
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          localStorage.setItem('workspace_theme', newTheme);
+          this.applyTheme(newTheme);
+        }
+
+        /* ---------- STOCKAGE LOCAL (SIMULATION DE DOSSIER) ---------- */
+        createAppFolderMarker() {
+          if (!localStorage.getItem('workspace_folder_created')) {
+            localStorage.setItem('workspace_folder_created', 'true');
+            localStorage.setItem('workspace_app_folder', APP_FOLDER);
+          }
+        }
+
+        updateStorageStats() {
+          const sitesData = JSON.stringify(this.sites);
+          const storageUsed = new Blob([sitesData]).size;
+          const percentage = (storageUsed / MAX_STORAGE_BYTES) * 100;
+
+          document.getElementById('storageUsage').textContent = this.formatBytes(storageUsed);
+          document.getElementById('storageBar').style.width = `${Math.min(percentage, 100)}%`;
+          document.getElementById('dataUsage').textContent = this.formatBytes(storageUsed);
+          document.getElementById('dataBar').style.width = `${Math.min(percentage, 100)}%`;
+        }
+
+        formatBytes(bytes) {
+          if (bytes === 0) return '0 Bytes';
+          const units = ['Bytes', 'KB', 'MB', 'GB'];
+          const index = Math.floor(Math.log(bytes) / Math.log(1024));
+          return parseFloat((bytes / Math.pow(1024, index)).toFixed(2)) + ' ' + units[index];
+        }
+
+        /* ---------- DÉTECTION IP PUBLIQUE ---------- */
+        async detectPublicIP() {
+          try {
+            const response = await fetch('https://api.ipify.org?format=json');
+            const data = await response.json();
+            document.getElementById('publicIp').textContent = data.ip;
+          } catch (error) {
+            document.getElementById('publicIp').textContent = 'N/A';
+          }
+        }
+
+        /* ---------- RENDU DE LA GRILLE DE SITES ---------- */
+        render() {
+          const grid = document.getElementById('sitesGrid');
+          let data = [...this.sites];
+
+          // Filtrage selon le filtre actif
+          if (this.currentFilter === 'favorites') {
+            data = data.filter(site => site.favorite);
+          } else if (this.currentFilter === 'visited') {
+            data.sort((a, b) => (b.visits || 0) - (a.visits || 0));
+          } else if (this.currentFilter === 'recent') {
+            data.sort((a, b) => (b.lastVisit || 0) - (a.lastVisit || 0));
+          }
+
+          // État vide
+          if (data.length === 0) {
+            grid.innerHTML = `
+              <div class="empty-state">
+                <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <use href="#icon-folder"/>
+                </svg>
+                <div class="empty-title">Aucun site</div>
+                <p>Clique sur + pour ajouter un site</p>
+              </div>`;
+            return;
+          }
+
+          // Génération des cartes
+          grid.innerHTML = data.map(site => `
             <div class="site-card" onclick="app.launchSite(${site.id})">
               <div class="site-header">
                 <div class="site-icon">
-                  ${site.icon                     ? `<img src="${site.icon}" onerror="this.style.display='none';this.parentElement.innerHTML='<svg width=\\'32\\' height=\\'32\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'var(--text-secondary)\\' stroke-width=\\'2\\'><circle cx=\\'12\\' cy=\\'12\\' r=\\'10\\'></circle><line x1=\\'2\\' y1=\\'12\\' x2=\\'22\\' y2=\\'12\\'></line><path d=\\'M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z\\'></path></svg>'">`
-                    : `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`
-                  }
+                  ${site.icon
+                    ? `<img src="${site.icon}" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='🌐'">`
+                    : '🌐'}
                 </div>
                 <div class="site-actions">
-                  <button class="site-action-btn" onclick="event.stopPropagation(); app.copyCredentials(${site.id})">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-                      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-                    </svg>
-                  </button>
-                  <button class="site-action-btn" onclick="event.stopPropagation(); app.editSite(${site.id})">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                    </svg>
-                  </button>
-                  <button class="site-action-btn delete" onclick="event.stopPropagation(); app.deleteSite(${site.id})">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="3 6 5 6 21 6"></polyline>
-                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                    </svg>
+                  <button class="site-action delete" onclick="event.stopPropagation();app.deleteSite(${site.id})">
+                    <svg width="14" height="14" viewBox="0 0 24 24"><use href="#icon-trash"/></svg>
                   </button>
                 </div>
               </div>
               <div class="site-name">${this.escapeHtml(site.name)}</div>
-              <div class="site-url">${domain}</div>
+              <div class="site-url">${this.escapeHtml(this.getDomain(site.url))}</div>
               <div class="site-badges">
-                ${site.fav ? '<span class="badge badge-fav"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>' : ''}
-                ${hasCreds ? '<span class="badge badge-secure"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span>' : ''}
-                <span class="badge badge-visits"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> ${site.visits || 0}</span>
+                ${site.favorite ? '<span class="badge badge-fav">★</span>' : ''}
+                ${(site.email || site.password) ? '<span class="badge badge-secure">🔒</span>' : ''}
+                <span class="badge badge-visits">${site.visits || 0} vues</span>
               </div>
             </div>
-          `;
-        }).join('');
-      }
-      
-      saveSite() {
-        const url = document.getElementById('siteUrl').value.trim();
-        const name = document.getElementById('siteName').value.trim();
-        
-        if (!url) {
-          this.showToast('Veuillez entrer une URL', 'error');
-          return;
+          `).join('');
+
+          this.updateStorageStats();
         }
-        
-        let finalUrl = url;
-        if (!url.startsWith('http://') && !url.startsWith('https://')) {
-          finalUrl = 'https://' + url;
-        }        
-        const pass = document.getElementById('sitePass').value;
-        
-        const siteData = {
-          url: finalUrl,
-          name: name || this.getDomain(finalUrl),
-          icon: `https://www.google.com/s2/favicons?domain=${this.getDomain(finalUrl)}&sz=128`,
-          email: document.getElementById('siteEmail').value,
-          pass: pass ? btoa(pass) : '',
-          fav: document.getElementById('siteFav').checked,
-          visits: this.editingId ? (this.sites.find(s => s.id === this.editingId)?.visits || 0) : 0,
-          lastVisit: this.editingId ? (this.sites.find(s => s.id === this.editingId)?.lastVisit || Date.now()) : Date.now()
-        };
-        
-        if (this.editingId) {
-          const idx = this.sites.findIndex(s => s.id === this.editingId);
-          if (idx !== -1) {
-            siteData.id = this.editingId;
-            this.sites[idx] = siteData;
+
+        escapeHtml(text) {
+          const element = document.createElement('div');
+          element.textContent = text;
+          return element.innerHTML;
+        }
+
+        getDomain(url) {
+          try {
+            return new URL(url).hostname.replace('www.', '');
+          } catch {
+            return url;
           }
-        } else {
-          siteData.id = Date.now();
-          this.sites.unshift(siteData);
         }
-        
-        localStorage.setItem('ws_sites', JSON.stringify(this.sites));
-        this.closeModal('addModal');
-        this.render();
-        this.showToast('Site enregistré', 'success');
-        
-        ['siteUrl', 'siteName', 'siteEmail', 'sitePass'].forEach(id => {
-          document.getElementById(id).value = '';
-        });
-        document.getElementById('siteFav').checked = false;
-        this.editingId = null;
-      }
-      
-      editSite(id) {
-        const site = this.sites.find(s => s.id === id);
-        if (!site) return;
-        
-        this.editingId = id;
-        document.getElementById('modalTitle').textContent = 'Modifier le site';
-        document.getElementById('siteUrl').value = site.url;
-        document.getElementById('siteName').value = site.name;
-        document.getElementById('siteEmail').value = site.email || '';
-        document.getElementById('sitePass').value = site.pass ? atob(site.pass) : '';
-        document.getElementById('siteFav').checked = site.fav;
-        
-        document.getElementById('addModal').classList.add('active');      }
-      
-      deleteSite(id) {
-        if (confirm('Supprimer ce site ?')) {
-          this.sites = this.sites.filter(s => s.id !== id);
-          localStorage.setItem('ws_sites', JSON.stringify(this.sites));
+
+        /* ---------- AJOUT D'UN NOUVEAU SITE ---------- */
+        saveSite() {
+          const urlInput = document.getElementById('siteUrl');
+          const nameInput = document.getElementById('siteName');
+          const emailInput = document.getElementById('siteEmail');
+          const passInput = document.getElementById('sitePass');
+
+          let url = urlInput.value.trim();
+          const name = nameInput.value.trim();
+
+          if (!url) {
+            this.showToast('URL requise', 'error');
+            return;
+          }
+
+          // Ajout du protocole si absent
+          if (!/^https?:\/\//i.test(url)) {
+            url = 'https://' + url;
+          }
+
+          const newSite = {
+            id: Date.now(),
+            url: url,
+            name: name || this.getDomain(url),
+            icon: `https://www.google.com/s2/favicons?domain=${this.getDomain(url)}&sz=64`,
+            email: emailInput.value.trim(),
+            password: btoa(passInput.value || ''),
+            favorite: false,
+            visits: 0,
+            lastVisit: Date.now()
+          };
+
+          this.sites.unshift(newSite);
+          localStorage.setItem('workspace_sites', JSON.stringify(this.sites));
+
+          // Réinitialisation des champs
+          urlInput.value = '';
+          nameInput.value = '';
+          emailInput.value = '';
+          passInput.value = '';
+
+          this.closeModal('addModal');
+          this.render();
+          this.showToast('Site ajouté avec succès', 'success');
+        }
+
+        /* ---------- LANCEMENT D'UN SITE ---------- */
+        launchSite(id) {
+          const site = this.sites.find(s => s.id === id);
+          if (!site) return;
+          site.visits = (site.visits || 0) + 1;
+          site.lastVisit = Date.now();
+          localStorage.setItem('workspace_sites', JSON.stringify(this.sites));
+          window.open(site.url, '_blank');
+          this.render(); // Met à jour le compteur de visites
+        }
+
+        /* ---------- SUPPRESSION D'UN SITE ---------- */
+        deleteSite(id) {
+          if (!confirm('Supprimer ce site définitivement ?')) return;
+          this.sites = this.sites.filter(site => site.id !== id);
+          localStorage.setItem('workspace_sites', JSON.stringify(this.sites));
           this.render();
           this.showToast('Site supprimé', 'success');
         }
-      }
-      
-      launchSite(id) {
-        const site = this.sites.find(s => s.id === id);
-        if (!site) return;
-        
-        site.visits = (site.visits || 0) + 1;
-        site.lastVisit = Date.now();
-        localStorage.setItem('ws_sites', JSON.stringify(this.sites));
-        
-        window.open(site.url, '_blank');
-        this.render();
-      }
-      
-      copyCredentials(id) {
-        const site = this.sites.find(s => s.id === id);
-        if (!site) return;
-        
-        let text = `${site.name}\n${site.url}\n`;
-        if (site.email) text += `Email: ${site.email}\n`;
-        if (site.pass) text += `MDP: ${atob(site.pass)}`;
-        
-        navigator.clipboard.writeText(text).then(() => {
-          this.showToast('Identifiants copiés', 'success');
-        });
-      }
-      
-      setFilter(filter, element) {
-        this.currentFilter = filter;
-        
-        document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
-        if (element) element.classList.add('active');
-        
-        this.render();
-      }
-      
-      searchSites(query) {
-        if (!query) {
+
+        /* ---------- FILTRES ET RECHERCHE ---------- */
+        setFilter(filter, element) {
+          this.currentFilter = filter;
+          // Mise à jour des classes actives
+          document.querySelectorAll('.chip').forEach(chip => chip.classList.remove('active'));
+          document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+          if (element) element.classList.add('active');
           this.render();
-          return;
-        }        
-        const filtered = this.sites.filter(s => 
-          s.name.toLowerCase().includes(query.toLowerCase()) ||
-          s.url.toLowerCase().includes(query.toLowerCase())
-        );
-        
-        const grid = document.getElementById('sitesGrid');
-        if (filtered.length === 0) {
-          grid.innerHTML = '<div class="empty-state"><p>Aucun résultat</p></div>';
-        } else {
-          this.sites = filtered;
+        }
+
+        searchSites(query) {
+          if (!query.trim()) {
+            // Si la recherche est vide, on recharge les sites complets
+            this.sites = JSON.parse(localStorage.getItem('workspace_sites')) || [];
+          } else {
+            const lowerQuery = query.toLowerCase();
+            const allSites = JSON.parse(localStorage.getItem('workspace_sites')) || [];
+            this.sites = allSites.filter(site =>
+              site.name.toLowerCase().includes(lowerQuery) ||
+              site.url.toLowerCase().includes(lowerQuery)
+            );
+          }
           this.render();
-          this.sites = JSON.parse(localStorage.getItem('ws_sites'));
+        }
+
+        /* ---------- MODALES ---------- */
+        openAddModal() {
+          document.getElementById('addModal').classList.add('active');
+        }
+
+        closeModal(modalId) {
+          document.getElementById(modalId).classList.remove('active');
+        }
+
+        /* ---------- PANNEAU PARAMÈTRES ---------- */
+        openSettingsPanel() {
+          document.getElementById('settingsPanel').classList.add('open');
+        }
+
+        closeSettingsPanel() {
+          document.getElementById('settingsPanel').classList.remove('open');
+        }
+
+        /* ---------- ACTIONS DE STOCKAGE ---------- */
+        clearWorkspaceFolder() {
+          if (!confirm('Vider complètement le dossier Workspace Pro ? Cette action est irréversible.')) return;
+          localStorage.removeItem('workspace_sites');
+          localStorage.removeItem('workspace_folder_created');
+          localStorage.removeItem('workspace_app_folder');
+          this.sites = [];
+          this.render();
+          this.showToast('Dossier vidé avec succès', 'success');
+        }
+
+        clearAllData() {
+          if (!confirm('Effacer TOUTES les données ? Cette action est définitive.')) return;
+          localStorage.removeItem('workspace_sites');
+          localStorage.removeItem('workspace_folder_created');
+          localStorage.removeItem('workspace_app_folder');
+          this.sites = [];
+          this.render();
+          this.showToast('Toutes les données ont été effacées', 'warning');
+        }
+
+        exportData() {
+          if (this.sites.length === 0) {
+            this.showToast('Aucune donnée à exporter', 'warning');
+            return;
+          }
+          const blob = new Blob([JSON.stringify(this.sites, null, 2)], { type: 'application/json' });
+          const anchor = document.createElement('a');
+          anchor.href = URL.createObjectURL(blob);
+          anchor.download = `workspace-backup-${Date.now()}.json`;
+          anchor.click();
+          this.showToast('Export réussi', 'success');
+        }
+
+        /* ---------- NOTIFICATIONS TOAST ---------- */
+        showToast(message, type = 'success') {
+          const toast = document.getElementById('toast');
+          toast.className = `toast ${type} show`;
+          toast.textContent = message;
+          clearTimeout(this.toastTimeout);
+          this.toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+          }, 3000);
+        }
+
+        /* ---------- INSTALLATION PWA ---------- */
+        setupPWA() {
+          window.addEventListener('beforeinstallprompt', (event) => {
+            event.preventDefault();
+            this.deferredPrompt = event;
+          });
         }
       }
-      
-      openAddModal() {
-        this.editingId = null;
-        document.getElementById('modalTitle').textContent = 'Nouveau Site';
-        ['siteUrl', 'siteName', 'siteEmail', 'sitePass'].forEach(id => {
-          document.getElementById(id).value = '';
-        });
-        document.getElementById('siteFav').checked = false;
-        document.getElementById('addModal').classList.add('active');
-      }
-      
-      openSettings() {
-        this.showToast('Paramètres - Fonctionnalité à venir', 'success');
-      }
-      
-      closeModal(id) {
-        document.getElementById(id).classList.remove('active');
-      }
-      
-      getDomain(url) {
-        try {
-          return new URL(url).hostname.replace('www.', '');
-        } catch {
-          return url;
-        }
-      }
-      
-      escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-      }
-      
-      showToast(message, type = 'success') {
-        const toast = document.getElementById('toast');        toast.className = `toast ${type}`;
-        document.getElementById('toastMessage').textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3000);
-      }
-    }
-    
-    const app = new WorkspaceApp();
-    
-    // Register Service Worker
-    if ('serviceWorker' in navigator) {
-      const swCode = `
-        self.addEventListener('install', e => self.skipWaiting());
-        self.addEventListener('activate', e => e.waitUntil(clients.claim()));
-        self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response('Offline'))));
-      `;
-      const blob = new Blob([swCode], {type: 'application/javascript'});
-      const swUrl = URL.createObjectURL(blob);
-      navigator.serviceWorker.register(swUrl);
-    }
+
+      // Instance globale accessible
+      window.app = new WorkspaceProApp();
+    })();
   </script>
 </body>
 </html>
